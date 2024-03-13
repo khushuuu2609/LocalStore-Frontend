@@ -1,37 +1,32 @@
 import React from 'react';
+import category from '../../../service/categories';
 
 function SellerReg() {
     return (
-        <div className="container my-5 p-4 seller-reg">
-            <h2>Register as Seller</h2>
-            <form>
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Name</label>
-                    <input type="text" className="form-control" id="name" name="name" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input type="email" className="form-control" id="email" name="email" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" name="password" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                    <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="phone" className="form-label">Phone Number</label>
-                    <input type="text" className="form-control" id="phone" name="phone" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="location" className="form-label">Location</label>
-                    <input type="text" className="form-control" id="location" name="location" />
-                </div>
-                <button type="submit" className="btn btn-primary">Register</button>
-            </form>
-        </div>
+        <div className="container home-layout card-bg w-50 vh-90">
+        <h2>Seller Registration</h2>
+        <br></br>
+        <form>
+            <div className="mb-3">
+                <label htmlFor="categories" className="form-label">Category</label>
+                <select className="form-select" id="categories" name="category">
+                        {
+                            category.map((data, id) => <option key={id} value={data}>{data}</option>)
+                        }
+                </select>
+            </div>
+            <div className="mb-3">
+                <label htmlFor="description" className="form-label">Description</label>
+                <textarea className="form-control" id="description" name="description" rows="3"></textarea>
+            </div>
+            <div className="mb-3">
+                <label htmlFor="location" className="form-label">Location</label>
+                <input type="text" className="form-control" id="location" name="location" />
+            </div>
+            <br></br>
+            <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+    </div>
     );
 }
 

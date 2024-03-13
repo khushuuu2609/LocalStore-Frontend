@@ -1,6 +1,6 @@
 
+import { Outlet } from 'react-router-dom';
 import './App.css';
-import DefineRouts from './components/DefineRouts'
 
 
 import "./css/bootstrap.min.css";
@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <DefineRouts />
+      <Outlet />
     </>
   )
 }

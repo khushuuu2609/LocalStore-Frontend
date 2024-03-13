@@ -1,61 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import React, { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom'
 
 function Signin() {
-    const [UserData, setUserData] = useState({});
-    const navigate = useNavigate();
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        if (user) {
-            navigate('/Home')
+    const form = useRef(null)
+    const [error, setError] = useState(null);
+    const navigate = useNavigate()
+
+    async function handleSubmit(e) {
+        e.preventDefault()
+
+        const formData = new FormData(form.current)
+        const user = Object.fromEntries(formData.entries())
+
+        const response = await fetch('http://localhost:8080/api/auth/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        })
+        const data = await response.json()
+        if (data?.error) {
+            setError(data.error)
+            return
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    //form submit event handlling function
-    const handleSubmit = async event => {
-        event.preventDefault();
-
-        setLoading(true)
-        //fetching API
-        const response = await fetch("http://localhost:8080/api/v1/auth/signin", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(UserData)
-        });
-
-        const apiObj = await response.json()
-
-
-        //if API responses error
-        if (apiObj.error) {
-            setLoading(false)
-            alert(apiObj.error);
-        }
-        //if API responses successfully
-        else if (apiObj.username) {
-
-            localStorage.setItem("user", JSON.stringify(apiObj))
-
-            setLoading(false)
-            alert("Login Successfull !!")
-            navigate("/Home");
-
-        }
-        //if API resonses 500 request
         else {
-            setLoading(false)
-            alert(apiObj.error.message)
+            toast.success("Login successful!")
+            navigate("/home")
         }
-        setLoading(false)
+        localStorage.setItem("token", JSON.stringify({ token: data.token }))
     }
 
-    //input change event handling function
-    const onChange = (event) => {
-        setUserData({ ...UserData, [event.target.name]: event.target.value })
-    }
     return (
         <div>
             <section className="vh-100 gradient-custom-3">
@@ -64,19 +39,20 @@ function Signin() {
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col-12 col-md-9 col-lg-7 col-xl-6">
                                 <div className="card" style={{ borderRadius: '15px' }}>
-                                    <div className="card-body p-5">
-                                        <h2 className="text-uppercase text-center mb-5">Login Here!!</h2>
+                                    <div className="card-body px-5">
+                                        <h2 className="text-uppercase text-center mb-4">Login</h2>
 
-                                        <form onSubmit={handleSubmit}>
-                        
+                                        <form onSubmit={handleSubmit} ref={form}>
+                                            <span className='text-danger mb-3 d-block  fw-bold'>{error}</span>
+
                                             <div className="form-outline mb-4">
                                                 <label className="form-label" htmlFor="form3Example3cg"><b>Your Email</b></label>
-                                                <input type="email" id="form3Example3cg" name="email" className="form-control border border-4 form-control-lg" />
+                                                <input type="email" required id="form3Example3cg" name="email" className="form-control form-control-lg border border-4 " />
                                             </div>
 
                                             <div className="form-outline mb-4">
                                                 <label className="form-label" htmlFor="form3Example4cg"><b>Password</b></label>
-                                                <input type="password" id="form3Example4cg"  name="password" className="form-control border border-4  form-control-lg" />
+                                                <input type="password" required id="form3Example4cg" name="password" className="form-control form-control-lg border border-4 " />
                                             </div>
 
                                             <div className="d-flex justify-content-center">
@@ -84,8 +60,8 @@ function Signin() {
                                                     className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                                             </div>
 
-                                            <p className="text-center text-muted mt-5 mb-0">dont's have an account? <a href="#!"
-                                                className="fw-bold text-body"><u>Signup here</u></a></p>
+                                            <p className="text-center text-muted mt-5 mb-0">Don't have an account? 
+                                            <Link className='sign-link' to="/signup">   Signup Here!! </Link></p>
 
                                         </form>
 

@@ -2,8 +2,8 @@ import React from 'react';
 
 function Order() {
     return (
-        <section className="vh-100 gradient-custom-2">
-            <div className="container py-5 h-100">
+        <section className="vh-100">
+            <div className="container py-5 h-100 home-layout card-bg">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-10 col-lg-8 col-xl-6">
                         <div className="card card-stepper" style={{ borderRadius: '16px' }}>

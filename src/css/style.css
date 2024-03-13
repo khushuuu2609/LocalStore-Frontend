@@ -660,7 +660,7 @@
 
         /* contact us */
 
-        .contact-us{
+        .card-bg{
             background: #b0f3751e;
         }
 
@@ -711,4 +711,8 @@
       .profile-input::placeholder {
         border: 3px solid black; /* Add border to placeholders */
         padding: 10px; /* Add padding to placeholders */
+      }
+
+      .home-layout{
+        margin: 20vh auto;
       }

@@ -1,8 +1,8 @@
 import React from 'react';
-
+import category from '../../service/categories';
 function Shop() {
     return (
-        <div className="container">
+        <div className="container home-layout card-bg w-50 vh-90">
             <h2>Product Details Form</h2>
             <form>
                 <div className="mb-3">
@@ -11,10 +11,10 @@ function Shop() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="categories" className="form-label">Select Categories</label>
-                    <select className="form-select" id="categories" name="categories">
-                        <option value="1">Category 1</option>
-                        <option value="2">Category 2</option>
-                        <option value="3">Category 3</option>
+                    <select className="form-select" id="categories" name="category">
+                        {
+                            category.map((data, id) => <option key={id} value={data}>{data}</option>)
+                        }
                     </select>
                 </div>
                 <div className="mb-3">

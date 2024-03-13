@@ -1,6 +1,8 @@
 import React from 'react'
 import image1 from "../../assets/img/hero-img-1.jpg"
 import image2 from "../../assets/img/hero-img-2.png"
+
+
 function Hero() {
     return (
         <>
