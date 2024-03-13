@@ -27,32 +27,26 @@ function Profile (){
                         <div className="row mt-2">
                             <div className="col-md-12 mb-3">
                                 <div className="form-group">
-                                    <label className="labels text-dark font-weight-bold">First Name</label>
-                                    <input type="text" className="form-control " placeholder="first name" value="" />
-                                </div>
-                            </div>
-                            <div className="col-md-12 mb-3">
-                                <div className="form-group">
-                                    <label className="labels text-dark font-weight-bold">Last Name</label>
-                                    <input type="text" className="form-control " value="" placeholder="lastname" />
+                                    <label className="labels text-dark font-weight-bold">UserName</label>
+                                    <input type="text" className="form-control " placeholder="first name" value="username" />
                                 </div>
                             </div>
                             <div className="col-md-12 mb-3">
                                 <div className="form-group">
                                     <label className="labels text-dark font-weight-bold">Email</label>
-                                    <input type="email" className="form-control " value="" placeholder="email" />
+                                    <input type="email" className="form-control " value="email" placeholder="email" />
                                 </div>
                             </div>
                             <div className="col-md-12 mb-3">
                                 <div className="form-group">
                                     <label className="labels text-dark font-weight-bold">Password</label>
-                                    <input type="password" className="form-control " value="" placeholder="password" />
+                                    <input type="password" className="form-control " value="password" placeholder="password" />
                                 </div>
                             </div>
                             <div className="col-md-12 mb-3">
                                 <div className="form-group">
                                     <label className="labels text-dark font-weight-bold">Location</label>
-                                    <input type="text" className="form-control " value="" placeholder="location" />
+                                    <input type="text" className="form-control " value="location" placeholder="location" />
                                 </div>
                             </div>
                         </div>

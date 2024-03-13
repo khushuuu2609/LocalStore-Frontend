@@ -1,6 +1,7 @@
 import React from 'react'
 import image1 from "../../assets/img/hero-img-1.jpg"
 import image2 from "../../assets/img/hero-img-2.png"
+import { Link } from 'react-router-dom'
 
 
 function Hero() {
@@ -22,11 +23,11 @@ function Hero() {
                                 <div className="carousel-inner" role="listbox">
                                     <div className="carousel-item active rounded">
                                         <img src={image1} className="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide" />
-                                        <a href="#" className="btn px-4 py-2 text-white rounded">Shop</a>
+                                        <Link to="/shop" className="btn px-4 py-2 text-white rounded">Shop</Link>
                                     </div>
                                     <div className="carousel-item rounded">
                                         <img src={image2} className="img-fluid w-100 h-100 rounded" alt="Second slide" />
-                                        <a href="#" className="btn px-4 py-2 text-white rounded">Orders</a>
+                                        <Link to="/orders" className="btn px-4 py-2 text-white rounded">Orders</Link>
                                     </div>
                                 </div>
                                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">

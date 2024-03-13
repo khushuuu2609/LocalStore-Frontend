@@ -29,8 +29,9 @@ function Signin() {
             navigate("/home")
         }
         localStorage.setItem("token", JSON.stringify({ token: data.token }))
+ 
     }
-
+    
     return (
         <div>
             <section className="vh-100 gradient-custom-3">
@@ -62,6 +63,8 @@ function Signin() {
 
                                             <p className="text-center text-muted mt-5 mb-0">Don't have an account? 
                                             <Link className='sign-link' to="/signup">   Signup Here!! </Link></p>
+
+                                            <p className="text-center text-muted">Forgot password? <Link className='signin-link' to="/forgotpassword">Change Here!!</Link></p>
 
                                         </form>
 

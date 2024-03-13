@@ -16,6 +16,8 @@ import SellerReg from './components/dashboard/ExplorAsSeller/SellerReg.jsx'
 import Orders from './components/dashboard/Orders.jsx'
 import Profile from './components/dashboard/Profile.jsx'
 import Notifications from './components/dashboard/Notification.jsx'
+import ForgotPassword from './components/auth/ForgotPassword.jsx'
+import ResetPassword from  './components/auth/ResetPassword.jsx'
 
 
 const router = createBrowserRouter(
@@ -24,20 +26,29 @@ const router = createBrowserRouter(
     <>
       <Route path="/" loader={isLoggedin}>
         <Route index element={<Signin />} />
+        <Route path='forgotpassword' element={<ForgotPassword/>}/>
+        <Route path='resetpassword' element={<ResetPassword/>}/>
         <Route path='signup' element={<Signup />} />
+        
       </Route>
 
       <Route path='/*' element={<RequiredAuth />}>
         <Route element={<Layout />} >
-          <Route path='home' element={<Home />} />
+          <Route path='home' element={<Home />} /> 
           <Route path='contact' element={<ContactUs />} />
           <Route path='shop' element={<Shop />} />
           <Route path='seller' element={<SellerReg />} />
           <Route path='orders' element={<Orders />} />
           <Route path='profile' element={<Profile />} />
           <Route path='notification' element={<Notifications />} />
-
         </Route>
+      </Route>
+
+      <Route path='//' element={<RequiredAuth />}>
+      <Route element={<Layout />} >
+      <Route path='/shop' element={<Shop />} />
+      <Route path='/orders' element={<Orders />} />
+      </Route>
       </Route>
     </>
   )

@@ -19,8 +19,10 @@ function Signup() {
             setError(data.error)
             return
         }
-        localStorage.setItem("token", JSON.stringify({token:data.token}))
+        //localStorage.setItem("token", JSON.stringify({token:data.token}))
+        form.current.reset()
     }
+
     return (
         <div>
             <section className="vh-100 gradient-custom-3">
