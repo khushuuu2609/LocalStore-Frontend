@@ -1,5 +1,7 @@
 
-import React, { useRef} from 'react'
+import React, {useRef} from 'react'
+import { toast } from 'react-toastify';
+
 
 function ContactUs() {
     const form = useRef(null)
@@ -10,23 +12,16 @@ function ContactUs() {
         e.preventDefault()
 
         const formData = new FormData(form.current)
-        const user = Object.fromEntries(formData.entries())
+        const contactUs = Object.fromEntries(formData.entries())
 
-        const response = await fetch('http://localhost:8080/api/img/shop', {
+        const response = await fetch('http://localhost:8080/api/contact-us', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
+            body: JSON.stringify(contactUs)
         })
-        // const data = await response.json()
-        // if (data?.error) {
-        //     setError(data.error)
-        //     return
-        // }
-        // else {
-        //     toast.success("Login successful!")
-        //     navigate("/home")
-        // }
+        toast.success("Form submitted successfully!")
         localStorage.setItem("token", JSON.stringify({ token: data.token }))
+        form.current.reset()
     }
     return (
         <div className="container py-5 home-layout">
@@ -38,23 +33,25 @@ function ContactUs() {
                             <form onSubmit={handleSubmit} ref={form}>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Name</label>
-                                    <input type="text" className="form-control" id="name" name="USERname" />
+                                    <input type="text" className="form-control" id="name" name="username" required/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Email</label>
-                                    <input type="email" className="form-control" id="email" name="email" />
+                                    <input type="email" className="form-control" id="email" name="email" required/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="message" className="form-label">Message</label>
-                                    <textarea className="form-control" id="message" name="message" rows="5"></textarea>
+                                    <textarea className="form-control" id="message" name="message" rows="5" required></textarea>
                                 </div>
                                 <button type="submit" className="btn btn-primary">Submit</button>
+
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
     );
 }
 
