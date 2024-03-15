@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
+import SellerReg from './ExplorAsSeller/SellerReg';
 
 function Profile() {
     const [user, setUser] = useState({})
@@ -35,7 +36,7 @@ function Profile() {
         toast.success("Profile updated  successfully!")
         form.current.reset()
     }
-    
+
     return (
         <div className="container rounded bg-white mt-5 mb-5 ">
             <div className="row">
