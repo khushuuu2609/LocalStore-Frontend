@@ -35,7 +35,7 @@ function Profile() {
         toast.success("Profile updated  successfully!")
         form.current.reset()
     }
-    
+
     return (
         <div className="container rounded bg-white mt-5 mb-5 ">
             <div className="row">
@@ -70,6 +70,22 @@ function Profile() {
                                     <div className="form-group">
                                         <label className="labels text-dark font-weight-bold">Location</label>
                                         <input type="text" className="form-control" name="location" defaultValue={user.location} placeholder="location" />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="categories" className="form-label">Category</label>
+                                        <select className="form-select" id="categories" name="category" multiple>
+                                            {
+                                                category.map((data, id) => <option key={id} value={data}>{data}</option>)
+                                            }
+                                        </select>
+                                    </div>                                                 
+                                    <div className="mb-3">
+                                        <label htmlFor="description" className="form-label">Description</label>
+                                        <textarea className="form-control" id="description" name="description" rows="3"></textarea>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="location" className="form-label">Location</label>
+                                        <input type="text" className="form-control" id="location" name="location" />
                                     </div>
                                 </div>
                                 <div className="mt-5 text-center">

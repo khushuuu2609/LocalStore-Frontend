@@ -14,12 +14,12 @@ function Signup() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
         })
+        
         const data = await response.json()
         if (data?.error) {
             setError(data.error)
-            return
+            return        
         }
-        //localStorage.setItem("token", JSON.stringify({token:data.token}))
         form.current.reset()
     }
 

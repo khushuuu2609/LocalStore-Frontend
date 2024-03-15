@@ -1,5 +1,5 @@
 
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 import { toast } from 'react-toastify';
 
 
@@ -20,7 +20,6 @@ function ContactUs() {
             body: JSON.stringify(contactUs)
         })
         toast.success("Form submitted successfully!")
-        localStorage.setItem("token", JSON.stringify({ token: data.token }))
         form.current.reset()
     }
     return (
@@ -33,11 +32,11 @@ function ContactUs() {
                             <form onSubmit={handleSubmit} ref={form}>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Name</label>
-                                    <input type="text" className="form-control" id="name" name="username" required/>
+                                    <input type="text" className="form-control" id="name" name="username" required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Email</label>
-                                    <input type="email" className="form-control" id="email" name="email" required/>
+                                    <input type="email" className="form-control" id="email" name="email" required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="message" className="form-label">Message</label>
@@ -51,7 +50,7 @@ function ContactUs() {
                 </div>
             </div>
         </div>
-        
+
     );
 }
 
