@@ -18,6 +18,7 @@ import Profile from './components/dashboard/Profile.jsx'
 import Notifications from './components/dashboard/Notification.jsx'
 import ForgotPassword from './components/auth/ForgotPassword.jsx'
 import ResetPassword from  './components/auth/ResetPassword.jsx'
+import PaymentPage from './components/PaymentPage.jsx'
 
 
 const router = createBrowserRouter(
@@ -45,11 +46,14 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path='//' element={<RequiredAuth />}>
-      <Route element={<Layout />} >
+      <Route element={<Layout />} />
       <Route path='/shop' element={<Shop />} />
       <Route path='/orders' element={<Orders />} />
+      
       </Route>
-      </Route>
+      
+      <Route path='/payment' element={<PaymentPage/>} />
+  
     </>
   )
 )
