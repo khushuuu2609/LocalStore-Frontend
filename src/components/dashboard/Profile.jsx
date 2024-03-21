@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import SellerReg from "./ExplorAsSeller/SellerReg";
 

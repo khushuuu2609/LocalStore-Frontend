@@ -124,18 +124,34 @@ function Signup() {
                                             <div className="form-outline mb-4">
                                                 <label
                                                     className="form-label"
-                                                    htmlFor="form3Example1cg2"
+                                                    htmlFor="form3Example1cgaddress"
                                                 >
                                                     <b>Address</b>
                                                 </label>
                                                 <input
                                                     type="text"
                                                     required
-                                                    id="form3Example1cg2"
+                                                    id="form3Example1cgaddress"
                                                     name="address"
                                                     className="form-control border border-4  form-control-lg"
                                                 />
                                             </div>
+                                            <div className="form-outline mb-4">
+                                                <label
+                                                    className="form-label"
+                                                    htmlFor="form3Example1cgarea"
+                                                >
+                                                    <b>Area</b>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    id="form3Example1cgarea"
+                                                    name="area_name"
+                                                    className="form-control border border-4  form-control-lg"
+                                                />
+                                            </div>
+
                                             <div className="form-outline mb-4">
                                                 <label
                                                     className="form-label"
