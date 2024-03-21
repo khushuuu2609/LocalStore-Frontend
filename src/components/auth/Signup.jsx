@@ -10,7 +10,6 @@ function Signup() {
         const formData = new FormData(form.current);
         const user = Object.fromEntries(formData.entries());
         user.pin_code = parseInt(user.pin_code);
-        user.city = "surat";
         // https://api.postalpincode.in/pincode/110001
         const postResponse = await fetch(
             `https://api.postalpincode.in/pincode/${user.pin_code}`
