@@ -40,7 +40,7 @@ function Shop() {
                     <select
                         className="form-select"
                         id="categories"
-                        name="category"
+                        name="categories"
                     >
                         {category.map((data, id) => (
                             <option key={id} value={data}>
