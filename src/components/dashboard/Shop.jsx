@@ -8,6 +8,7 @@ function Shop() {
         e.preventDefault();
         const formdata = new FormData(form.current);
         formdata.append("userid", token.userId);
+        formdata.append("username", token.username);
         const response = await fetch("http://localhost:8080/api/img/shop", {
             method: "POST",
             body: formdata,
