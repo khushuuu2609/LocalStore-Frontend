@@ -1,10 +1,16 @@
 import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import SellerReg from "./ExplorAsSeller/SellerReg";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
     const [user, setUser] = useState({});
     const userToken = JSON.parse(localStorage.getItem("token"));
+    const navigate = useNavigate();
+    function logout() {
+        localStorage.clear();
+        navigate("/");
+    }
     useEffect(() => {
         const fetchUser = async () => {
             let response = await fetch(
@@ -70,6 +76,13 @@ function Profile() {
                             {user.username}
                         </span>
                         <span className="text-black-50">{user.email}</span>
+                        <button
+                            className="btn btn-danger"
+                            type="button"
+                            onClick={logout}
+                        >
+                            logout
+                        </button>
                     </div>
                 </div>
                 <div className="col-md-5 border-right home-layout card-bg w-50 vh-90">
