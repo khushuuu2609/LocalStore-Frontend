@@ -45,13 +45,13 @@ function SellerReg() {
     }
 
     return (
-        <div className="container home-layout card-bg w-50 vh-90">
+        <div className="container home-layout card-bg w-50 vh-95">
             <h2>Seller Registration</h2>
             <br></br>
             <form onSubmit={handleSubmit} ref={form}>
                 <div className="mb-3">
                     <label htmlFor="categories" className="form-label">
-                        Category
+                        Categories
                     </label>
                     <select
                         className="form-select"
@@ -77,6 +77,40 @@ function SellerReg() {
                         rows="3"
                     ></textarea>
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="area_name" className="form-label">
+                        Area
+                    </label>
+                    <input
+                        className="form-control"
+                        id="area_name"
+                        name="area_name"
+                        rows="3"
+                    ></input>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="city" className="form-label">
+                        City
+                    </label>
+                    <input
+                        className="form-control"
+                        id="city"
+                        name="city"
+                        rows="3"
+                    ></input>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="pin_code" className="form-label">
+                        Pin-Code
+                    </label>
+                    <input
+                        className="form-control"
+                        id="pin_code"
+                        name="pin_code"
+                        rows="3"
+                    ></input>
+                </div>
+
 
                 <br></br>
                 <button type="submit" className="btn btn-primary">
