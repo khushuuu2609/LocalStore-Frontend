@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
-import SellerReg from "./ExplorAsSeller/SellerReg";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
