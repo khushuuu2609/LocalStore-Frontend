@@ -34,6 +34,7 @@ function Signin() {
                 token: data.token,
                 userId: data.userId,
                 role: data.role,
+                username: data.username,
             })
         );
     }

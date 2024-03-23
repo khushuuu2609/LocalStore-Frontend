@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
-
-function Profile() {
+import category from "../service/categories";
+function SellerProfile() {
     const [user, setUser] = useState({});
     const userToken = JSON.parse(localStorage.getItem("token"));
     useEffect(() => {
@@ -96,18 +96,6 @@ function Profile() {
                                 </div>
 
                                 <div className="col-md-12 mb-3">
-                                    <div className="form-group">
-                                        <label className="labels text-dark font-weight-bold">
-                                            Location
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="location"
-                                            defaultValue={user.location}
-                                            placeholder="location"
-                                        />
-                                    </div>
                                     <div className="mb-3">
                                         <label
                                             htmlFor="categories"
@@ -142,18 +130,47 @@ function Profile() {
                                             rows="3"
                                         ></textarea>
                                     </div>
+
                                     <div className="mb-3">
                                         <label
-                                            htmlFor="location"
+                                            htmlFor="address"
                                             className="form-label"
                                         >
-                                            Location
+                                            address
                                         </label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            id="location"
-                                            name="location"
+                                            id="address"
+                                            name="address"
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label
+                                            htmlFor="area"
+                                            className="form-label"
+                                        >
+                                            Area
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="area"
+                                            name="area"
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label
+                                            htmlFor="pincode"
+                                            className="form-label"
+                                        >
+                                            Pincode
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="pincode"
+                                            name="pincode"
                                         />
                                     </div>
                                 </div>
@@ -175,4 +192,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default SellerProfile;
