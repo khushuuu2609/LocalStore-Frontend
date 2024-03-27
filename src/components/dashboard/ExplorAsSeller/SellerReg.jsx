@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import category from "../../../service/categories";
+import categories from "../../../service/categories";
 
 function SellerReg() {
     const form = useRef(null);
@@ -9,40 +9,47 @@ function SellerReg() {
         e.preventDefault();
         const formData = new FormData(form.current);
         const user = Object.fromEntries(formData.entries());
-
-        // Extract selected categories and convert them to an array
-        const selectedCategories = Array.from(formData.getAll("category"));
-
+        const selectedCategories = Array.from(formData.getAll("categories"));
+    
         // Update the user object with the selected categories array
-        user.category = selectedCategories;
-
-        const response = await fetch("http://localhost:8080/api/auth/seller", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-        });
-
-        const data = await response.text();
-
-        if (data?.error) {
-            setError(data.error);
-            return;
-        }
-        form.current.reset();
-
-        const userToken = JSON.parse(localStorage.getItem("token"));
-        const roleUpdateResponse = await fetch(
-            `http://localhost:8080/api/auth/upgradeToSeller/${userToken.userId}`,
-            {
-                method: "PATCH",
+        user.categories = selectedCategories;
+    
+        try {
+            const response = await fetch("http://localhost:8080/api/auth/seller", {
+                method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ role: "SELLER" }),
+                body: JSON.stringify(user),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to register seller: ${response.status}`);
             }
-        );
-
-        const roleUpdateData = await roleUpdateResponse.text();
-        console.log("roleUpdateData", roleUpdateData);
+    
+            const data = await response.text();
+            form.current.reset();
+    
+            const userToken = JSON.parse(localStorage.getItem("token"));
+            const roleUpdateResponse = await fetch(
+                `http://localhost:8080/api/auth/upgradeToSeller/${userToken.userId}`,
+                {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ role: "SELLER" }),
+                }
+            );
+    
+            if (!roleUpdateResponse.ok) {
+                throw new Error(`Failed to update user role: ${roleUpdateResponse.status}`);
+            }
+    
+            console.log("User updated to seller account");
+            console.log(selectedCategories);
+        } catch (error) {
+            console.error("Error:", error.message);
+            setError("Failed to register seller");
+        }
     }
+    
 
     return (
         <div className="container home-layout card-bg w-50 vh-95">
@@ -59,7 +66,7 @@ function SellerReg() {
                         name="categories"
                         multiple
                     >
-                        {category.map((data, id) => (
+                        {categories.map((data, id) => (
                             <option key={id} value={data}>
                                 {data}
                             </option>
@@ -116,6 +123,7 @@ function SellerReg() {
                 <button type="submit" className="btn btn-primary">
                     Submit
                 </button>
+
             </form>
         </div>
     );
