@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
-import category from "../service/categories";
+import categories from "../service/categories";
 function SellerProfile() {
     const [user, setUser] = useState({});
     const userToken = JSON.parse(localStorage.getItem("token"));
@@ -106,10 +106,10 @@ function SellerProfile() {
                                         <select
                                             className="form-select"
                                             id="categories"
-                                            name="category"
+                                            name="categories"
                                             multiple
                                         >
-                                            {category.map((data, id) => (
+                                            {categories.map((data, id) => (
                                                 <option key={id} value={data}>
                                                     {data}
                                                 </option>

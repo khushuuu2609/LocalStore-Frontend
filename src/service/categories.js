@@ -1,4 +1,4 @@
-const category = ["Home & Kitchen",
+const categories = ["Home & Kitchen",
 "Beauty & Personal Care",
 "Clothing, Shoes & Jewelry",
 "Toys & games",
@@ -25,4 +25,4 @@ const category = ["Home & Kitchen",
 
 
 
-export default category
+export default categories

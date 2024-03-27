@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import category from "../../../service/categories";
+import categories from "../../../service/categories";
 
 function SellerReg() {
     const form = useRef(null);
@@ -57,14 +57,14 @@ function SellerReg() {
     }
 
     return (
-        <div className="container home-layout card-bg w-50 vh-90">
+        <div className="container home-layout card-bg w-50 vh-95">
             <h2>Seller Registration</h2>
             <br></br>
             <span>{error}</span>
             <form onSubmit={handleSubmit} ref={form}>
                 <div className="mb-3">
                     <label htmlFor="categories" className="form-label">
-                        Category
+                        Categories
                     </label>
                     <select
                         className="form-select"
@@ -72,7 +72,7 @@ function SellerReg() {
                         name="categories"
                         multiple
                     >
-                        {category.map((data, id) => (
+                        {categories.map((data, id) => (
                             <option key={id} value={data}>
                                 {data}
                             </option>
@@ -120,6 +120,7 @@ function SellerReg() {
                 <button type="submit" className="btn btn-primary">
                     Submit
                 </button>
+
             </form>
         </div>
     );

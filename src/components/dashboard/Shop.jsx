@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import category from "../../service/categories";
+import categories from "../../service/categories";
 import { toast } from "react-toastify";
 function Shop() {
     const form = useRef(null);
@@ -43,7 +43,7 @@ function Shop() {
                         id="categories"
                         name="categories"
                     >
-                        {category.map((data, id) => (
+                        {categories.map((data, id) => (
                             <option key={id} value={data}>
                                 {data}
                             </option>
