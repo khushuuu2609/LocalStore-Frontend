@@ -9,16 +9,28 @@ function SellerReg() {
         e.preventDefault();
         const formData = new FormData(form.current);
         const user = Object.fromEntries(formData.entries());
-
+        const postResponse = await fetch(
+            `https://api.postalpincode.in/pincode/${user.pin_code}`
+        );
+        const postData = await postResponse.json();
+        if (postData[0]?.Status === "Error") {
+            setError("Wrong Pincode!");
+            return;
+        }
+        user.city = postData[0].PostOffice[0].District;
         // Extract selected categories and convert them to an array
-        const selectedCategories = Array.from(formData.getAll("category"));
+        const selectedCategories = Array.from(formData.getAll("categories"));
 
         // Update the user object with the selected categories array
-        user.category = selectedCategories;
-
+        user.categories = selectedCategories;
+        console.log(selectedCategories);
+        const token = JSON.parse(localStorage.getItem("token"));
         const response = await fetch("http://localhost:8080/api/auth/seller", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token.token}`,
+            },
             body: JSON.stringify(user),
         });
 
@@ -48,6 +60,7 @@ function SellerReg() {
         <div className="container home-layout card-bg w-50 vh-90">
             <h2>Seller Registration</h2>
             <br></br>
+            <span>{error}</span>
             <form onSubmit={handleSubmit} ref={form}>
                 <div className="mb-3">
                     <label htmlFor="categories" className="form-label">
@@ -71,11 +84,36 @@ function SellerReg() {
                         Description
                     </label>
                     <textarea
-                        className="form-control"
+                        className="form-control border border-4  form-control-lg"
                         id="description"
                         name="description"
                         rows="3"
                     ></textarea>
+                </div>
+                <div className="form-outline mb-4">
+                    <label className="form-label" htmlFor="form3Example1cgarea">
+                        <b>Area</b>
+                    </label>
+                    <input
+                        type="text"
+                        required
+                        id="form3Example1cgarea"
+                        name="area_name"
+                        className="form-control border border-4  form-control-lg"
+                    />
+                </div>
+
+                <div className="form-outline mb-4">
+                    <label className="form-label" htmlFor="form3Example1cg2">
+                        <b>Pin Code</b>
+                    </label>
+                    <input
+                        type="number"
+                        required
+                        id="form3Example1cg2"
+                        name="pin_code"
+                        className="form-control border border-4  form-control-lg"
+                    />
                 </div>
 
                 <br></br>
