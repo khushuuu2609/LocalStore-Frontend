@@ -1,10 +1,13 @@
 import { useRef, useState } from "react";
 import categories from "../../../service/categories";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SellerReg() {
     const form = useRef(null);
     const [error, setError] = useState(null);
-
+    const { toggleUpdate } = useOutletContext();
+    const navigate = useNavigate();
     async function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData(form.current);
@@ -25,14 +28,17 @@ function SellerReg() {
         user.categories = selectedCategories;
         console.log(selectedCategories);
         const token = JSON.parse(localStorage.getItem("token"));
-        const response = await fetch("http://localhost:8080/api/auth/seller", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token.token}`,
-            },
-            body: JSON.stringify(user),
-        });
+        const response = await fetch(
+            `http://localhost:8080/api/auth/seller?userId=${token.userId}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token.token}`,
+                },
+                body: JSON.stringify(user),
+            }
+        );
 
         const data = await response.text();
 
@@ -53,6 +59,11 @@ function SellerReg() {
         );
 
         const roleUpdateData = await roleUpdateResponse.text();
+        userToken.role = "SELLER";
+        localStorage.setItem("token", JSON.stringify(userToken));
+        toast.success("Seller registration done");
+        toggleUpdate((prev) => !prev);
+        navigate("/");
         console.log("roleUpdateData", roleUpdateData);
     }
 
@@ -120,7 +131,6 @@ function SellerReg() {
                 <button type="submit" className="btn btn-primary">
                     Submit
                 </button>
-
             </form>
         </div>
     );
