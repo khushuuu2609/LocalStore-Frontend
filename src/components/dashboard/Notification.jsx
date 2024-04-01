@@ -5,19 +5,27 @@ import axios from "axios";
 function Notifications() {
     const [notifications, setNotifications] = useState([]);
     const [showNotifications, setShowNotifications] = useState(false);
-
+    const token = JSON.parse(localStorage.getItem("token"));
     useEffect(() => {
         fetchNotifications();
     }, []);
 
     const fetchNotifications = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:8080/api/notifications"
+            // const response = await axios.get(
+            //     "http://localhost:8080/api/notifications"
+            // );
+            // console.log("Response data:", response.data);
+            // setNotifications(response.data);
+            // setShowNotifications(true);
+            const response = await fetch(
+                `http://localhost:8080/api/notifications?userId=${token.userId}`,
+                {
+                    method: "GET",
+                }
             );
-            console.log("Response data:", response.data);
-            setNotifications(response.data);
-            setShowNotifications(true);
+            const data = await response.text();
+            console.log("notifications==>", data);
         } catch (error) {
             console.error("Error fetching notifications:", error);
         }
