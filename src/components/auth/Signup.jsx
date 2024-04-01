@@ -147,7 +147,7 @@ function Signup() {
                                                     type="text"
                                                     required
                                                     id="form3Example1cgarea"
-                                                    name="area_name"
+                                                    name="areaName"
                                                     className="form-control border border-4  form-control-lg"
                                                 />
                                             </div>
