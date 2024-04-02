@@ -1,39 +1,53 @@
 import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import categories from "../service/categories";
+import { useNavigate } from "react-router-dom";
 function SellerProfile() {
     const [user, setUser] = useState({});
+    const navigate = useNavigate();
+    const form = useRef(null);
+    const [error, setError] = useState(null);
+
     const userToken = JSON.parse(localStorage.getItem("token"));
+    function logout() {
+        localStorage.clear();
+        navigate("/");
+    }
+
     useEffect(() => {
         const fetchUser = async () => {
             let response = await fetch(
-                `http://localhost:8080/api/auth/${userToken.userId}`,
+                `http://localhost:8080/api/auth/seller/${userToken.userId}`,
                 {
                     method: "GET",
                 }
             );
             const data = await response.json();
             setUser(data);
+            console.log(data);
         };
         fetchUser();
     }, []);
 
-    const form = useRef(null);
-    const [error, setError] = useState(null);
-
     async function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData(form.current);
-        const user = Object.fromEntries(formData.entries());
+        const User = Object.fromEntries(formData.entries());
+
+        if (formData.getAll("categories").length > 1) {
+            User.categories = formData.getAll("categories");
+        }
+        console.log(user, User);
         const response = await fetch(
-            `http://localhost:8080/api/auth/update/${userToken.userId}`,
+            `http://localhost:8080/api/auth/seller/${userToken.userId}`,
             {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(user),
+                body: JSON.stringify({ ...user, ...User }),
             }
         );
         const data = await response.text();
+        setUser({ ...user, ...User });
         if (data?.error) {
             setError(data.error);
             return;
@@ -54,9 +68,18 @@ function SellerProfile() {
                             alt="Profile"
                         />
                         <span className="font-weight-bold">
-                            {user.username}
+                            {user?.user?.username}
                         </span>
-                        <span className="text-black-50">{user.email}</span>
+                        <span className="text-black-50">
+                            {user?.user?.email}
+                        </span>
+                        <button
+                            className="btn btn-danger"
+                            type="button"
+                            onClick={logout}
+                        >
+                            logout
+                        </button>
                     </div>
                 </div>
                 <div className="col-md-5 border-right home-layout card-bg w-50 vh-90">
@@ -76,7 +99,7 @@ function SellerProfile() {
                                             className="form-control"
                                             name="username"
                                             placeholder="first name"
-                                            defaultValue={user.username}
+                                            defaultValue={user?.user?.username}
                                         />
                                     </div>
                                 </div>
@@ -89,7 +112,7 @@ function SellerProfile() {
                                             type="email"
                                             className="form-control"
                                             name="email"
-                                            defaultValue={user.email}
+                                            defaultValue={user?.user?.email}
                                             placeholder="email"
                                         />
                                     </div>
@@ -128,23 +151,10 @@ function SellerProfile() {
                                             id="description"
                                             name="description"
                                             rows="3"
+                                            defaultValue={user.description}
                                         ></textarea>
                                     </div>
 
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="address"
-                                            className="form-label"
-                                        >
-                                            address
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="address"
-                                            name="address"
-                                        />
-                                    </div>
                                     <div className="mb-3">
                                         <label
                                             htmlFor="area"
@@ -155,8 +165,9 @@ function SellerProfile() {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            id="area"
+                                            id="areaName"
                                             name="area"
+                                            defaultValue={user.areaName}
                                         />
                                     </div>
                                     <div className="mb-3">
@@ -171,6 +182,7 @@ function SellerProfile() {
                                             className="form-control"
                                             id="pincode"
                                             name="pincode"
+                                            defaultValue={user.pin_code}
                                         />
                                     </div>
                                 </div>
