@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 
 function BuyerNotifications() {
     const [offers, setOffers] = useState([]);
+    const token = JSON.parse(localStorage.getItem("token"));
     useEffect(() => {
         async function fetchOffer() {
             const response = await fetch(
-                "http://localhost:8080/api/img/offers",
+                `http://localhost:8080/api/img/offers?userId=${token.userId}`,
                 {
                     method: "GET",
                 }
