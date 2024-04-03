@@ -25,6 +25,7 @@ import ForgotPassword from "./components/auth/ForgotPassword.jsx";
 import ResetPassword from "./components/auth/ResetPassword.jsx";
 import PaymentPage from "./components/PaymentPage.jsx";
 import SellerProfile from "./components/SellerProfile.jsx";
+import BuyerNotifications from "./components/dashboard/NotificationsBuyers.jsx";
 
 const token = JSON.parse(localStorage.getItem("token"));
 const router = createBrowserRouter(
@@ -46,11 +47,22 @@ const router = createBrowserRouter(
                     <Route path="seller" element={<SellerReg />} />
                     <Route path="orders" element={<Orders />} />
                     {token?.role === "USER" ? (
-                        <Route path="profile" element={<Profile />} />
+                        <>
+                            <Route path="profile" element={<Profile />} />
+                            <Route
+                                path="notification"
+                                element={<BuyerNotifications />}
+                            />
+                        </>
                     ) : (
-                        <Route path="profile" element={<SellerProfile />} />
+                        <>
+                            <Route path="profile" element={<SellerProfile />} />
+                            <Route
+                                path="notification"
+                                element={<Notifications />}
+                            />
+                        </>
                     )}
-                    <Route path="notification" element={<Notifications />} />
                 </Route>
             </Route>
 

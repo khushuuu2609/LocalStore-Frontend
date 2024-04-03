@@ -25,18 +25,28 @@ function Signin() {
             return;
         } else {
             toast.success("Login successful!");
+            if (data.role === "SELLER") {
+                const seller = await await fetch(
+                    `http://localhost:8080/api/auth/seller/${data.userId}`,
+                    {
+                        method: "GET",
+                    }
+                );
+                const sellerData = await seller.json();
+                data.sellerId = sellerData.sellerId;
+            }
+            localStorage.setItem(
+                "token",
+                JSON.stringify({
+                    token: data.token,
+                    userId: data.userId,
+                    role: data.role,
+                    username: data.username,
+                    sellerId: data?.sellerId,
+                })
+            );
             navigate("/home");
         }
-        console.log(data);
-        localStorage.setItem(
-            "token",
-            JSON.stringify({
-                token: data.token,
-                userId: data.userId,
-                role: data.role,
-                username: data.username,
-            })
-        );
     }
 
     return (

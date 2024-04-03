@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 
 import axios from "axios";
+import OfferForm from "./OfferForm";
 
 function Notifications() {
     const [notifications, setNotifications] = useState([]);
+    const [showForm, setShowForm] = useState(false);
     const token = JSON.parse(localStorage.getItem("token"));
     useEffect(() => {
         fetchNotifications();
@@ -47,7 +49,19 @@ function Notifications() {
                             <p className="card-text">
                                 Description: {notification.description}
                             </p>
+                            <button
+                                onClick={() => setShowForm(true)}
+                                className="btn btn-primary"
+                            >
+                                Give Offer
+                            </button>
                         </div>
+                        {showForm && (
+                            <OfferForm
+                                offerId={notification}
+                                formState={setShowForm}
+                            />
+                        )}
                     </div>
                 ))}
             </div>
