@@ -4,6 +4,7 @@ import categories from "../../service/categories";
 const OfferForm = ({ offerId, formState }) => {
     const token = JSON.parse(localStorage.getItem("token"));
     const form = useRef(null);
+
     async function handleSubmit(e) {
         e.preventDefault();
         const offer = new FormData(form.current);
@@ -11,8 +12,6 @@ const OfferForm = ({ offerId, formState }) => {
         offer.set("sellerId", token?.sellerId);
         offer.set("shopId", offerId?.shopId?.shopId);
         offer.set("userId", offerId.user.id);
-        // http://localhost:8080/api/img/offer
-
         const response = await fetch("http://localhost:8080/api/img/offer", {
             method: "POST",
             body: offer,

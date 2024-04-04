@@ -54,19 +54,12 @@ const router = createBrowserRouter(
                     ) : (
                         <>
                             <Route path="profile" element={<SellerProfile />} />
-                            <Route
-                                path="notification"
-                                element={<Notifications />}
-                            />
                         </>
                     )}
+                    <Route path="notification" element={<Notifications />} />
+                    <Route path="shop" element={<Shop />} />
+                    <Route path="orders" element={<Orders />} />
                 </Route>
-            </Route>
-
-            <Route path="//" element={<RequiredAuth />}>
-                <Route element={<Layout />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/orders" element={<Orders />} />
             </Route>
 
             <Route path="/payment" element={<PaymentPage />} />
