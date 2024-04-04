@@ -19,6 +19,11 @@ function Order() {
             <div className="container py-5 h-100 home-layout card-bg">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-10 col-lg-8 col-xl-6">
+                        {orders.length < 1 && (
+                            <h1 className="text-center">
+                                Orders Not Available
+                            </h1>
+                        )}
                         {orders.map((order) => {
                             return (
                                 <div
