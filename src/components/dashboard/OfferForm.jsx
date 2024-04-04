@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import categories from "../../service/categories";
+import { toast } from "react-toastify";
 
 const OfferForm = ({ offerId, formState }) => {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -12,13 +13,22 @@ const OfferForm = ({ offerId, formState }) => {
         offer.set("sellerId", token?.sellerId);
         offer.set("shopId", offerId?.shopId?.shopId);
         offer.set("userId", offerId.user.id);
-        const response = await fetch("http://localhost:8080/api/img/offer", {
-            method: "POST",
-            body: offer,
-            headers: { Authorization: `Bearer ${token.token}` },
-        });
-        const data = await response.json();
-        console.log(data);
+        try {
+            const response = await fetch(
+                "http://localhost:8080/api/img/offer",
+                {
+                    method: "POST",
+                    body: offer,
+                    headers: { Authorization: `Bearer ${token.token}` },
+                }
+            );
+            const data = await response.text();
+            toast.success(data);
+            form.current.reset();
+            formState(false);
+        } catch (e) {
+            toast.error("Somethiong went wrong!");
+        }
     }
     function hideForm(e) {
         if (e.target.id === "form-container") {
