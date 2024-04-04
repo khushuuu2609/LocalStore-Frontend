@@ -42,6 +42,12 @@ function Navbar() {
                                 >
                                     <b>Orders</b>
                                 </NavLink>
+                                <NavLink
+                                    to="offers"
+                                    className="nav-item nav-link"
+                                >
+                                    <b>Offers</b>
+                                </NavLink>
                                 {role !== "SELLER" && (
                                     <NavLink
                                         to="seller"

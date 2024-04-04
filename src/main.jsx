@@ -46,13 +46,10 @@ const router = createBrowserRouter(
                     <Route path="shop" element={<Shop />} />
                     <Route path="seller" element={<SellerReg />} />
                     <Route path="orders" element={<Orders />} />
+                    <Route path="offers" element={<BuyerNotifications />} />
                     {token?.role === "USER" ? (
                         <>
                             <Route path="profile" element={<Profile />} />
-                            <Route
-                                path="notification"
-                                element={<BuyerNotifications />}
-                            />
                         </>
                     ) : (
                         <>
