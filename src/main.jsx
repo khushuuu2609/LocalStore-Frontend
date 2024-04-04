@@ -26,6 +26,7 @@ import ResetPassword from "./components/auth/ResetPassword.jsx";
 import PaymentPage from "./components/PaymentPage.jsx";
 import SellerProfile from "./components/SellerProfile.jsx";
 import BuyerNotifications from "./components/dashboard/NotificationsBuyers.jsx";
+import VerifyOTP from "./components/auth/VerifyOTP.jsx";
 
 const token = JSON.parse(localStorage.getItem("token"));
 const router = createBrowserRouter(
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
                 <Route index element={<Signin />} />
                 <Route path="forgotpassword" element={<ForgotPassword />} />
                 <Route path="resetpassword" element={<ResetPassword />} />
+                <Route path="verify-otp" element={<VerifyOTP />} />
                 <Route path="signup" element={<Signup />} />
             </Route>
 

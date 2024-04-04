@@ -114,7 +114,7 @@ function Signin() {
                                                 </button>
                                             </div>
 
-                                            <p className="text-center text-muted mt-5 mb-0">
+                                            <p className="text-center text-muted mt-5 mb-0 link-size">
                                                 {"Don't have an account?"}
                                                 <Link
                                                     className="sign-link"
@@ -125,7 +125,7 @@ function Signin() {
                                                 </Link>
                                             </p>
 
-                                            <p className="text-center text-muted">
+                                            <p className="text-center text-muted link-size">
                                                 Forgot password?{" "}
                                                 <Link
                                                     className="signin-link"

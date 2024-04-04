@@ -1,40 +1,31 @@
-import React, { useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function EnterNewPassword() {
-    const { token } = useParams(); // Assuming the token is passed as a URL parameter
+function VerifyOTP() {
     const form = useRef(null);
-    const [error, setError] = useState(null);
     const nav = useNavigate();
     async function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData(form.current);
-        const newPassword = formData.get("newPassword");
-        const confirmPassword = formData.get("confirmPassword");
-        if (newPassword !== confirmPassword) {
-            setError("Passwords do not match");
-            return;
-        }
+        const otp = formData.get("otp");
         try {
-            const res = await fetch(
-                `http://localhost:8080/api/auth/reset-password?password=${newPassword}`,
-                { method: "POST", credentials: "include" }
+            const response = await fetch(
+                `http://localhost:8080/api/auth/verify-otp?otp=${otp}`,
+                {
+                    method: "POST",
+                    credentials: "include",
+                }
             );
-            const data = await res.text();
-            if (res.status === 200) {
-                toast.success(data);
-                nav("/");
-            } else toast.error("Something went wrong!!");
-        } catch (error) {
-            toast.error("Something went wrong!!");
-        }
-        // Add logic to handle the password update process
-        console.log("New Password:", newPassword);
-        // Reset the form after submission
-        form.current.reset();
-    }
 
+            if (response.status === 200) {
+                toast.success("OTP verified!!");
+                nav("/resetpassword");
+            } else toast.error("OTP does not match!!");
+        } catch (e) {
+            toast.error("OTP does not match!!");
+        }
+    }
     return (
         <div>
             <section className="vh-100 gradient-custom-3">
@@ -48,42 +39,24 @@ function EnterNewPassword() {
                                 >
                                     <div className="card-body px-5">
                                         <h2 className="text-uppercase text-center mb-4">
-                                            Enter New Password
+                                            Verify OTP
                                         </h2>
 
                                         <form
                                             onSubmit={handleSubmit}
                                             ref={form}
                                         >
-                                            <span className="text-danger mb-3 d-block fw-bold">
-                                                {error}
-                                            </span>
                                             <div className="form-outline mb-4">
                                                 <label
                                                     className="form-label"
-                                                    htmlFor="newPassword"
+                                                    htmlFor="email"
                                                 >
-                                                    <b>New Password</b>
+                                                    <b>OTP</b>
                                                 </label>
                                                 <input
-                                                    type="password"
-                                                    id="newPassword"
-                                                    name="newPassword"
-                                                    required
-                                                    className="form-control form-control-lg border border-4"
-                                                />
-                                            </div>
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="confirmPassword"
-                                                >
-                                                    <b>Confirm Password</b>
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    id="confirmPassword"
-                                                    name="confirmPassword"
+                                                    type="otp"
+                                                    id="otp"
+                                                    name="otp"
                                                     required
                                                     className="form-control form-control-lg border border-4"
                                                 />
@@ -94,11 +67,11 @@ function EnterNewPassword() {
                                                     type="submit"
                                                     className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body"
                                                 >
-                                                    Reset Password
+                                                    Verify OTP
                                                 </button>
                                             </div>
 
-                                            <p className="text-center text-muted mt-5 mb-0 ">
+                                            <p className="text-center text-muted ">
                                                 Remember your password?{" "}
                                                 <Link
                                                     className="signin-link"
@@ -119,4 +92,4 @@ function EnterNewPassword() {
     );
 }
 
-export default EnterNewPassword;
+export default VerifyOTP;

@@ -23,7 +23,7 @@ function Signup() {
         user.city = postData[0].PostOffice[0].District;
         const response = await fetch("http://localhost:8080/api/auth/signup", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+
             body: JSON.stringify(user),
         });
 
@@ -177,7 +177,7 @@ function Signup() {
                                                 </button>
                                             </div>
 
-                                            <p className="text-center text-muted mt-5 mb-0">
+                                            <p className="text-center text-muted mt-5 mb-0 link-size">
                                                 Have an account?
                                                 <Link
                                                     className="signin-link"

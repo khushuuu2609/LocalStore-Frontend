@@ -727,3 +727,7 @@
     background-color: rgba(128, 128, 128, 0.16);
     backdrop-filter: blur(4px);
 }
+
+.link-size {
+    font-size: 22px !important;
+}
