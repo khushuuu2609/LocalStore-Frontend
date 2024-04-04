@@ -64,23 +64,25 @@ function Navbar() {
                                 </NavLink>
                             </div>
                             <div className="d-flex m-3 me-0">
-                                <NavLink
-                                    to="/notification"
-                                    className="position-relative me-4 my-auto"
-                                >
-                                    <i className="fa fa-bell fa-2x text-dark"></i>
-                                    <span
-                                        className="position-absolute bg-danger rounded-circle d-flex align-items-center justify-content-center text-white px-1"
-                                        style={{
-                                            top: "-5px",
-                                            left: "15px",
-                                            height: "20px",
-                                            minWidth: "20px",
-                                        }}
+                                {role === "SELLER" && (
+                                    <NavLink
+                                        to="/notification"
+                                        className="position-relative me-4 my-auto"
                                     >
-                                        3
-                                    </span>
-                                </NavLink>
+                                        <i className="fa fa-bell fa-2x text-dark"></i>
+                                        <span
+                                            className="position-absolute bg-danger rounded-circle d-flex align-items-center justify-content-center text-white px-1"
+                                            style={{
+                                                top: "-5px",
+                                                left: "15px",
+                                                height: "20px",
+                                                minWidth: "20px",
+                                            }}
+                                        >
+                                            3
+                                        </span>
+                                    </NavLink>
+                                )}
                                 <NavLink to="/profile" className="my-auto">
                                     <i className="fas fa-user fa-2x text-dark"></i>
                                 </NavLink>

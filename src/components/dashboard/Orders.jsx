@@ -70,7 +70,7 @@ function Order() {
                                                 className={`step0 ${
                                                     order.status === "OPEN" ||
                                                     order.status ===
-                                                        "IN PROGRESS" ||
+                                                        "IN_PROGRESS" ||
                                                     order.status === "DELIVERED"
                                                         ? "active"
                                                         : ""
@@ -89,7 +89,7 @@ function Order() {
                                             <li
                                                 className={`step0 text-center ${
                                                     order.status ===
-                                                        "IN PROGRESS" ||
+                                                        "IN_PROGRESS" ||
                                                     order.status === "DELIVERED"
                                                         ? "active"
                                                         : ""

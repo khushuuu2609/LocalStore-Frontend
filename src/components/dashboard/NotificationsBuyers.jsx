@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function BuyerNotifications() {
     const [offers, setOffers] = useState([]);
@@ -17,6 +18,42 @@ function BuyerNotifications() {
         }
         fetchOffer();
     }, []);
+
+    async function acceptOffer(e) {
+        //
+        if (confirm("Are you sure you want to accept this offer!")) {
+            //
+            const index = parseInt(e.target.id);
+            const acceptedOffer = offers[index];
+            console.log(acceptedOffer.shop.shopId);
+            try {
+                const res = await fetch(
+                    `http://localhost:8080/api/img/${acceptedOffer.shop.shopId}/price?price=${acceptedOffer.price}`,
+                    {
+                        method: "PUT",
+                    }
+                );
+                const ChangeStatus = await fetch(
+                    `http://localhost:8080/api/img/status/${acceptedOffer.shop.shopId}?newStatus=IN_PROGRESS`,
+                    {
+                        method: "PUT",
+                    }
+                );
+                const deleteOffers = await fetch(
+                    `http://localhost:8080/api/img/deleteAllExceptOne?shopId=${acceptedOffer.shop.shopId}&offerId=${acceptedOffer.offer_id}`,
+                    {
+                        method: "DELETE",
+                    }
+                );
+                const data = await deleteOffers.text();
+                console.log(data);
+                toast.success("Offer Accepted successfully!");
+            } catch (e) {
+                toast.error("Something went wrong!");
+            }
+        } else return;
+    }
+
     return (
         <div className="container min-vh-100 py-5 mt-5">
             <h2 className="text-center mb-4 mt-5">Offer Notifications</h2>
@@ -56,7 +93,11 @@ function BuyerNotifications() {
                                     />
                                 </div>
                             </div>
-                            <button className="btn btn-primary">
+                            <button
+                                id={index}
+                                onClick={acceptOffer}
+                                className="btn btn-primary"
+                            >
                                 Accept Offer
                             </button>
                         </div>
