@@ -6,7 +6,7 @@ function BuyerNotifications() {
     useEffect(() => {
         async function fetchOffer() {
             const response = await fetch(
-                `http://localhost:8080/api/img/offers?userId=${token.userId}`,
+                `http://localhost:8080/api/img/offertoUser?userId=${token.userId}`,
                 {
                     method: "GET",
                 }
