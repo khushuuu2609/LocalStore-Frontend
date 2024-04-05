@@ -65,7 +65,7 @@ function Notifications() {
                             <p className="card-text">
                                 Description: {notification.description}
                             </p>
-                            {notification.shopId.status === "OPEN" ? (
+                            {notification?.shopId?.status === "OPEN" ? (
                                 <button
                                     onClick={() => {
                                         setShowForm(true);
@@ -75,7 +75,8 @@ function Notifications() {
                                 >
                                     Give Offer
                                 </button>
-                            ) : (
+                            ) : notification?.shopId?.status ===
+                              "IN_PROGRESS" ? (
                                 <button
                                     id={notification.shopId.shopId}
                                     onClick={deliver}
@@ -83,6 +84,10 @@ function Notifications() {
                                 >
                                     Deliver
                                 </button>
+                            ) : (
+                                <p className="text-success">
+                                    Order delivered ✔
+                                </p>
                             )}
                         </div>
                     </div>
