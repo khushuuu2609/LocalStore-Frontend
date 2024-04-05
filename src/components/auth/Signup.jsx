@@ -23,7 +23,7 @@ function Signup() {
         user.city = postData[0].PostOffice[0].District;
         const response = await fetch("http://localhost:8080/api/auth/signup", {
             method: "POST",
-            headers:{'content-type': 'application/json'},
+            headers: { "content-type": "application/json" },
             body: JSON.stringify(user),
         });
 

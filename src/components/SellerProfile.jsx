@@ -166,7 +166,7 @@ function SellerProfile() {
                                             type="text"
                                             className="form-control"
                                             id="areaName"
-                                            name="area"
+                                            name="areaName"
                                             defaultValue={user.areaName}
                                         />
                                     </div>

@@ -5,7 +5,12 @@ import { toast } from "react-toastify";
 const OfferForm = ({ offerId, formState }) => {
     const token = JSON.parse(localStorage.getItem("token"));
     const form = useRef(null);
-
+    console.log(
+        "offer id----",
+        offerId?.categories,
+        offerId?.shopId?.shopId,
+        offerId.user.id
+    );
     async function handleSubmit(e) {
         e.preventDefault();
         const offer = new FormData(form.current);
@@ -36,7 +41,6 @@ const OfferForm = ({ offerId, formState }) => {
             return;
         }
     }
-    console.log(offerId);
     return (
         <div
             className="position-fixed top-0 start-0 vw-100 v-100 form-bacdrop"

@@ -6,6 +6,7 @@ import OfferForm from "./OfferForm";
 function Notifications() {
     const [notifications, setNotifications] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [offerdata, sendData] = useState({});
     const token = JSON.parse(localStorage.getItem("token"));
     useEffect(() => {
         fetchNotifications();
@@ -50,21 +51,21 @@ function Notifications() {
                                 Description: {notification.description}
                             </p>
                             <button
-                                onClick={() => setShowForm(true)}
+                                onClick={() => {
+                                    setShowForm(true);
+                                    sendData(notification);
+                                }}
                                 className="btn btn-primary"
                             >
                                 Give Offer
                             </button>
                         </div>
-                        {showForm && (
-                            <OfferForm
-                                offerId={notification}
-                                formState={setShowForm}
-                            />
-                        )}
                     </div>
                 ))}
             </div>
+            {showForm && (
+                <OfferForm offerId={offerdata} formState={setShowForm} />
+            )}
         </div>
     );
 }
