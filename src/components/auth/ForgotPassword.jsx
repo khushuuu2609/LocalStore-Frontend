@@ -71,7 +71,7 @@ function ForgotPassword() {
                                             <p className="text-center text-muted ">
                                                 Remember your password?{" "}
                                                 <Link
-                                                    className="signin-link"
+                                                    className="signin-link link-size"
                                                     to="/signin"
                                                 >
                                                     Sign in here
