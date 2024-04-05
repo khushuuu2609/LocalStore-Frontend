@@ -17,8 +17,10 @@ function ForgotPassword() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),
             credentials: "include",
-        });
-        nav("/verify-otp", { state: email });
+        })
+        if(res.ok){
+            nav("/verify-otp", { state: email });
+        }
         // Reset the form after submission
         form.current.reset();
     }

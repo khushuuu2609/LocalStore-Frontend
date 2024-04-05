@@ -71,7 +71,7 @@ function VerifyOTP() {
                                                 </button>
                                             </div>
 
-                                            <p className="text-center text-muted ">
+                                            <p className="text-center text-muted link-size">
                                                 Remember your password?{" "}
                                                 <Link
                                                     className="signin-link"
