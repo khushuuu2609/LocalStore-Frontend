@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { toast } from "react-toastify";
 import axios from "axios";
 import OfferForm from "./OfferForm";
 
@@ -27,6 +27,21 @@ function Notifications() {
             console.error("Error fetching notifications:", error);
         }
     };
+
+    async function deliver(e) {
+        if (
+            confirm("Do you want to update status to deliver for this order?")
+        ) {
+            const id = e.target.id;
+            const ChangeStatus = await fetch(
+                `http://localhost:8080/api/img/status/${id}?newStatus=DELIVERED`,
+                {
+                    method: "PUT",
+                }
+            );
+            toast.success("Order status changed to Deliver!");
+        }
+    }
     return (
         <div className="container py-5 home-layout">
             <h2 className="text-center mb-4">Notifications</h2>
@@ -50,15 +65,25 @@ function Notifications() {
                             <p className="card-text">
                                 Description: {notification.description}
                             </p>
-                            <button
-                                onClick={() => {
-                                    setShowForm(true);
-                                    sendData(notification);
-                                }}
-                                className="btn btn-primary"
-                            >
-                                Give Offer
-                            </button>
+                            {notification.shopId.status === "OPEN" ? (
+                                <button
+                                    onClick={() => {
+                                        setShowForm(true);
+                                        sendData(notification);
+                                    }}
+                                    className="btn btn-primary"
+                                >
+                                    Give Offer
+                                </button>
+                            ) : (
+                                <button
+                                    id={notification.shopId.shopId}
+                                    onClick={deliver}
+                                    className="btn btn-primary"
+                                >
+                                    Deliver
+                                </button>
+                            )}
                         </div>
                     </div>
                 ))}

@@ -52,6 +52,11 @@ function Order() {
                                                     category:-{" "}
                                                     {order.categories}
                                                 </h4>
+                                                <h6>
+                                                    Price:-{" "}
+                                                    {order?.price ||
+                                                        "No offer accepted yet!"}
+                                                </h6>
                                             </div>
                                             <div>
                                                 <img
@@ -72,7 +77,7 @@ function Order() {
                                                     order.status ===
                                                         "IN_PROGRESS" ||
                                                     order.status === "DELIVERED"
-                                                        ? "active"
+                                                        ? "active fw-bolder fs-5"
                                                         : ""
                                                 }`}
                                                 id="step1"
@@ -91,7 +96,7 @@ function Order() {
                                                     order.status ===
                                                         "IN_PROGRESS" ||
                                                     order.status === "DELIVERED"
-                                                        ? "active"
+                                                        ? "active fw-bolder fs-5"
                                                         : ""
                                                 }`}
                                                 id="step2"
@@ -101,7 +106,7 @@ function Order() {
                                             <li
                                                 className={`step0 text-end ${
                                                     order.status === "DELIVERED"
-                                                        ? "active"
+                                                        ? "active fw-bolder fs-5"
                                                         : ""
                                                 }`}
                                                 id="step3"
