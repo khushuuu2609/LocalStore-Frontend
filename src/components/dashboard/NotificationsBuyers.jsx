@@ -69,9 +69,9 @@ function BuyerNotifications() {
                                 <div>
                                     <p className="text-muted mb-2">
                                         {" "}
-                                        Offer No.{" "}
+                                        Offer for order id{" "}
                                         <span className="fw-bold text-body">
-                                            {index + 1}
+                                            {order?.shop?.shopId}
                                         </span>
                                     </p>
                                 </div>
@@ -83,6 +83,20 @@ function BuyerNotifications() {
                                     <h3>{order.description}</h3>
                                     <h4>category:- {order.categories}</h4>
                                     <h5>price:- {order.price}</h5>
+                                    <small className="text-muted mb-2 d-block">
+                                        {" "}
+                                        Offer given by{" "}
+                                        <span className="fw-bold text-body">
+                                            {order?.seller?.user?.username}
+                                        </span>
+                                    </small>
+                                    <small className="text-muted mb-2 d-block">
+                                        {" "}
+                                        For more queries:{" "}
+                                        <span className="fw-bold text-body">
+                                            {order?.seller?.user?.email}
+                                        </span>
+                                    </small>
                                 </div>
                                 <div>
                                     <img
