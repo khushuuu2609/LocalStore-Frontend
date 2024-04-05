@@ -7,6 +7,7 @@ function Notifications() {
     const [notifications, setNotifications] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [offerdata, sendData] = useState({});
+    const [refresh, setrefresh] = useState(false);
     const token = JSON.parse(localStorage.getItem("token"));
     useEffect(() => {
         fetchNotifications();
@@ -41,6 +42,7 @@ function Notifications() {
             );
             toast.success("Order status changed to Deliver!");
         }
+        setrefresh((prev) => !prev);
     }
     return (
         <div className="container py-5 home-layout">
