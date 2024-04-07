@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Badge from '@mui/material/Badge';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+
 function Navbar() {
     const { role } = JSON.parse(localStorage.getItem("token"));
     const [notifications, setNotifications] = useState([]);
     const [offers, setOffers] = useState([]);
+    const navigate = useNavigate()
+    function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+            localStorage.clear();
+            navigate("/");
+        }
+    }
 
     useEffect(() => {
         const fetchNotifications = async () => {
@@ -82,7 +89,7 @@ function Navbar() {
                             </Badge></NavLink>
                         </li>}
                         <li>
-                            <button className="bg-red-600 py-2 px-8 text-white pb-3 rounded-3xl hover:bg-red-700  active:bg-red-600">
+                            <button onClick={logout} className="bg-red-600 py-2 px-8 text-white pb-3 rounded-3xl hover:bg-red-700  active:bg-red-600">
                                 Logout
                             </button>
                         </li>
