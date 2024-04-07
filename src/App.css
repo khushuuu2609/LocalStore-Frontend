@@ -15,3 +15,7 @@ body::-webkit-scrollbar-thumb {
   background-color: #ff9d00;
   outline: 1px solid white;
 }
+
+body:has(.open-modal) {
+  overflow: hidden;
+}

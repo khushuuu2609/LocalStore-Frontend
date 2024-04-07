@@ -13,9 +13,7 @@ const OfferForm = ({ offerId, formState }) => {
     };
     console.log(
         "offer id----",
-        offerId?.categories,
-        offerId?.shopId?.shopId,
-        offerId.user.id
+        offerId
     );
     async function handleSubmit(e) {
         e.preventDefault();

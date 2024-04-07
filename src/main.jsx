@@ -20,7 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SellerReg from "./components/dashboard/ExplorAsSeller/SellerReg.jsx";
 import Orders from "./components/dashboard/Orders.jsx";
 import Profile from "./components/dashboard/Profile.jsx";
-import Notifications from "./components/dashboard/Notification.jsx";
+import Notifications from "./components/dashboard/Notifications.jsx";
 import ForgotPassword from "./components/auth/ForgotPassword.jsx";
 import ResetPassword from "./components/auth/ResetPassword.jsx";
 import PaymentPage from "./components/PaymentPage.jsx";
