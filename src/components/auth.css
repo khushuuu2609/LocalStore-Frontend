@@ -1,0 +1,191 @@
+@import url(https://fonts.googleapis.com/css?family=Croissant+One:regular);
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Mooli:regular);
+@import url(https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&;display=swap);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+.form-container {
+  background-color: #e7e9eb;
+  height: 100vh;
+  padding: 50px 50px;
+  display: flex;
+  align-items: center;
+  @import url(https://fonts.googleapis.com/css?family=Noto+Sans+Buhid:regular);
+  justify-content: center;
+}
+
+.form {
+  background-color: #7bcbcc;
+  /* background: linear-gradient(to bottom, #36bbbb, #f1d6ae); */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 5px 8px 5px #888888;
+}
+
+.animation {
+  background-color: #7bcbcc;
+  /* background: linear-gradient(to bottom, #36bbbb, #aef1be); */
+  border-bottom-right-radius: 90px;
+  height: 90vh;
+}
+
+.animation-div {
+  height: 90vh;
+  background-color: white;
+}
+
+.form-class {
+  background-color: white;
+  border-top-left-radius: 90px;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.animation-div::before {
+  content: "Local Store";
+  font-family: "Croissant One";
+  margin-left: 32px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 120px;
+  font-size: 32px;
+  font-weight: 600;
+  width: 30%;
+}
+
+.croissant {
+  font-family: "Croissant One";
+}
+
+.input-fields {
+  margin: 20px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  width: 100%;
+}
+
+.form-title * {
+  font-family: "exo";
+  color: rgb(30, 30, 30);
+  background: -webkit-linear-gradient(#a1a1ff, #3eff91);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 38px;
+  font-weight: 900;
+  text-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.form__input {
+  border: none;
+  outline: none;
+  background-color: #f2f4f7;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-family: "mooli";
+}
+
+.form__input::placeholder {
+  font-family: "mooli";
+}
+
+.form__label {
+  font-family: "mooli";
+  font-weight: 600;
+}
+
+.submit-btn {
+  background: linear-gradient(to bottom, #cdcdff, #aef1cb);
+  height: 42px;
+  width: 120px;
+  border: none;
+  border-radius: 8px;
+  font-family: "exo";
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease box-shadow;
+}
+
+.submit-btn:hover {
+  box-shadow: 0px 0px 10px 1px black;
+}
+
+.submit-btn:active {
+  box-shadow: none;
+}
+
+.footer-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-link {
+  color: rgb(0, 64, 255);
+  font-family: "mooli";
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.mg {
+  margin: 10px 0px;
+}
+
+.mooli {
+  font-family: "mooli";
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(50%);
+}
+
+.loader-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(1px);
+  cursor: wait;
+}
+
+/* Dashboard designs */
+.body-container {
+  display: flex;
+  width: 100vw;
+  background-color: #f0f0f0;
+}
+
+.dash-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.active {
+  color: #fba419;
+  font-weight: 600;
+}

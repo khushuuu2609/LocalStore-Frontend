@@ -7,9 +7,11 @@ function Layout() {
     const [update, toggleUpdate] = useState(false);
     return (
         <>
-            <Navbar />
-            <Outlet context={{ update, toggleUpdate }} />
-            <Footer />
+            <div className="flex poppins flex-col w-full min-h-screen">
+                <Navbar />
+                <Outlet context={{ update, toggleUpdate }} />
+                <Footer />
+            </div>
         </>
     );
 }

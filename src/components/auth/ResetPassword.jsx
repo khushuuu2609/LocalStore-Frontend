@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Lottie from 'lottie-react'
+import animationSvg from '../../assets/animation.json'
 function EnterNewPassword() {
     const { token } = useParams(); // Assuming the token is passed as a URL parameter
     const form = useRef(null);
@@ -36,85 +37,45 @@ function EnterNewPassword() {
     }
 
     return (
-        <div>
-            <section className="vh-100 gradient-custom-3">
-                <div className="mask d-flex align-items-center h-100 form-scale">
-                    <div className="container h-100">
-                        <div className="row d-flex justify-content-center align-items-center h-100">
-                            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                                <div
-                                    className="card"
-                                    style={{ borderRadius: "15px" }}
-                                >
-                                    <div className="card-body px-5">
-                                        <h2 className="text-uppercase text-center mb-4">
-                                            Enter New Password
-                                        </h2>
+        <div className='form-container'>
+            <div className='bg-white'>
+                <div className="form">
+                    <div className='animation-div'>
+                        <Lottie className="animation" animationData={animationSvg} />
+                    </div>
 
-                                        <form
-                                            onSubmit={handleSubmit}
-                                            ref={form}
-                                        >
-                                            <span className="text-danger mb-3 d-block fw-bold">
-                                                {error}
-                                            </span>
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="newPassword"
-                                                >
-                                                    <b>New Password</b>
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    id="newPassword"
-                                                    name="newPassword"
-                                                    required
-                                                    className="form-control form-control-lg border border-4"
-                                                />
-                                            </div>
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="confirmPassword"
-                                                >
-                                                    <b>Confirm Password</b>
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    id="confirmPassword"
-                                                    name="confirmPassword"
-                                                    required
-                                                    className="form-control form-control-lg border border-4"
-                                                />
-                                            </div>
+                    <div className='form-class'>
+                        <div className='form-title'>
+                            <h1>RESET PASSWORD</h1>
+                        </div>
 
-                                            <div className="d-flex justify-content-center">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body"
-                                                >
-                                                    Reset Password
-                                                </button>
-                                            </div>
+                        <form onSubmit={handleSubmit} ref={form} className="form-body">
 
-                                            <p className="text-center text-muted mt-5 mb-0 ">
-                                                Remember your password?{" "}
-                                                <Link
-                                                    className="signin-link"
-                                                    to="/signin"
-                                                >
-                                                    Sign in here
-                                                </Link>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
+                            <div className="password input-fields">
+                                <label className="form__label" htmlFor="password">Password </label>
+                                <input className="form__input" name='newPassword' required type="password" id="password" placeholder="Password" />
                             </div>
+
+                            <div className="confirm-password input-fields">
+                                <label className="form__label" htmlFor="confirmPassword">Confirm Password </label>
+                                <input className="form__input" name="confirmPassword" required type="password" id="confirmPassword" placeholder="Confirm Password" />
+                            </div>
+
+                            <div className="footer-btn">
+                                <button type="submit" className="submit-btn">Get OTP</button>
+                            </div>
+                        </form>
+                        <div className="footer-btn mg">
+                            <p className='mooli'>Remember your password? {" "} </p>
+
+                            <Link className='sign-link' to="/">
+                                <p className='sign-link '>Login here!</p>
+                            </Link>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
         </div>
     );
 }

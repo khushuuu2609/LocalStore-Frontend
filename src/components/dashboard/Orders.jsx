@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 function Order() {
     const [orders, setOrders] = useState([]);
@@ -9,125 +15,71 @@ function Order() {
                 `http://localhost:8080/api/img/shops/${token.userId}`
             );
             const data = await response.json();
-            setOrders(data);
+            setOrders(data.reverse());
         }
         fetchOrder();
     }, []);
     console.log(orders);
     return (
-        <section className="">
-            <div className="container py-5 h-100 home-layout card-bg">
-                <div className="row d-flex justify-content-center align-items-center h-100">
-                    <div className="col-md-10 col-lg-8 col-xl-6">
-                        {orders.length < 1 && (
-                            <h1 className="text-center">
-                                Orders Not Available
-                            </h1>
-                        )}
-                        {orders.map((order) => {
-                            return (
-                                <div
-                                    key={order.shopId}
-                                    className="card card-stepper mb-5"
-                                    style={{ borderRadius: "16px" }}
-                                >
-                                    <div className="card-header p-4">
-                                        <div className="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <p className="text-muted mb-2">
-                                                    {" "}
-                                                    Order ID{" "}
-                                                    <span className="fw-bold text-body">
-                                                        {order.shopId}
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card-body p-4">
-                                        <div className="d-flex flex-row mb-4 pb-2">
-                                            <div className="flex-fill">
-                                                <h3>{order.description}</h3>
-                                                <h4>
-                                                    category:-{" "}
-                                                    {order.categories}
-                                                </h4>
-                                                <h6>
-                                                    Price:-{" "}
-                                                    {order?.price ||
-                                                        "No offer accepted yet!"}
-                                                </h6>
-                                            </div>
-                                            <div>
-                                                <img
-                                                    className="align-self-center img-fluid"
-                                                    src={`data:image/jpeg;base64,${order.photo}`}
-                                                    width="250"
-                                                    alt="Product"
-                                                />
-                                            </div>
-                                        </div>
-                                        <ul
-                                            id="progressbar-1"
-                                            className="mx-0 mt-0 mb-5 px-0 pt-0 pb-4"
-                                        >
-                                            <li
-                                                className={`step0 ${
-                                                    order.status === "OPEN" ||
-                                                    order.status ===
-                                                        "IN_PROGRESS" ||
-                                                    order.status === "DELIVERED"
-                                                        ? "active fw-bolder fs-5"
-                                                        : ""
-                                                }`}
-                                                id="step1"
-                                            >
-                                                <span
-                                                    style={{
-                                                        marginLeft: "22px",
-                                                        marginTop: "12px",
-                                                    }}
-                                                >
-                                                    OPEN
-                                                </span>
-                                            </li>
-                                            <li
-                                                className={`step0 text-center ${
-                                                    order.status ===
-                                                        "IN_PROGRESS" ||
-                                                    order.status === "DELIVERED"
-                                                        ? "active fw-bolder fs-5"
-                                                        : ""
-                                                }`}
-                                                id="step2"
-                                            >
-                                                <span>IN PROCESS</span>
-                                            </li>
-                                            <li
-                                                className={`step0 text-end ${
-                                                    order.status === "DELIVERED"
-                                                        ? "active fw-bolder fs-5"
-                                                        : ""
-                                                }`}
-                                                id="step3"
-                                            >
-                                                <span
-                                                    style={{
-                                                        marginRight: "22px",
-                                                    }}
-                                                >
-                                                    DELIVERED
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
+        <>
+            <div className="px-12">
+                <div className="w-9/12 mx-auto mt-8">
+                    <div><h2 className="text-themeColor-400 text-4xl font-bold">Order History</h2></div>
+                    <div></div>
                 </div>
-            </div>
-        </section>
+                <div className="flex flex-col justify-center gap-6 my-12">
+                    {orders.map((order, index) => {
+                        return (
+                            <Accordion elevation={2} defaultExpanded={!index} key={order?.shopId} sx={{
+                                [`&:before`]: { display: "none" }, width: "75%", marginX: "auto !important"
+                            }}>
+                                <div className=" bg-gray-200 items-center justify-between py-3 px-6">
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ fontSize: "26px" }} />} sx={{ display: "flex", '& .MuiAccordionSummary-content': { display: "flex", alignItems: "center", justifyContent: "space-between", } }}>
+                                        <div className="flex items-center justify-between gap-12">
+                                            <div>
+                                                <h4 className="font-semibold ">Order Number</h4><span>{order?.shopId}</span>
+                                            </div>
+                                            <div>
+                                                <h4 className="font-semibold">Product Name</h4><span>{order?.name ?? "Name Here!"}</span>
+                                            </div>
+                                            <div>
+                                                <h4 className="font-semibold">Date Placed</h4><span>{order?.date ?? "date here"}</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className={`grid me-8 items-center w-fit whitespace-nowrap rounded-full border-2  py-1 px-4 font-sans text-xs font-bold uppercase ${order?.status === "OPEN" ? 'border-blue-800 text-blue-800' : order?.status === "IN_PROGRESS" ? 'border-themeColor-400 text-themeColor-400' : 'border-green-800 text-green-800'} `}>{order?.status === "IN_PROGRESS" ? "IN PROGRESS" : order?.status}</span>
+                                        </div>
+                                    </AccordionSummary>
+                                </div>
+                                <AccordionDetails>
+                                    <div className="py-3 px-6 flex justify-between gap-6">
+                                        <div className="max-w-64 max-h-64">
+                                            <img className="object-contain rounded-lg drop-shadow-2xl shadow-xl " src={`data:image/jpeg;base64,${order?.photo}`} alt="" />
+                                        </div>
+                                        <div className="w-full">
+                                            <div className="flex items-center justify-between">
+                                                <h6 className="font-medium">Category: <span className="font-normal">{order?.categories}</span></h6>
+                                                <h6 className="font-medium">Price: <span className="font-normal">{order?.price || "No offer accepted yet!"}</span></h6>
+                                            </div>
+                                            <div className="mt-2">
+                                                <span>{order?.description}</span>
+                                            </div>
+                                            <div className="mt-8">
+                                                <h6 className="font-medium">Delivery Address: {" "} <span className="font-normal">{order?.user?.address}</span></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mx-6 mt-6">
+
+                                        <span className={`${order?.status === "OPEN" ? 'text-blue-800' : order?.status === "IN_PROGRESS" ? ' text-themeColor-400' : ' text-green-800'}`}>{order?.status === "OPEN" ? 'Your order is still open !' : order?.status === "IN_PROGRESS" ? "Your order is in progress, it'll be shortly delivered !" : 'Your order is successfully delivered'}</span>
+                                    </div>
+                                </AccordionDetails>
+                            </Accordion>
+                        )
+                    })}
+                </div>
+            </div >
+        </>
     );
 }
 

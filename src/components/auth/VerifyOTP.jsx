@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Lottie from 'lottie-react'
+import animationSvg from '../../assets/animation.json'
 function VerifyOTP() {
     const form = useRef(null);
     const nav = useNavigate();
@@ -27,67 +28,40 @@ function VerifyOTP() {
         }
     }
     return (
-        <div>
-            <section className="vh-100 gradient-custom-3">
-                <div className="mask d-flex align-items-center h-100 form-scale">
-                    <div className="container h-100">
-                        <div className="row d-flex justify-content-center align-items-center h-100">
-                            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                                <div
-                                    className="card"
-                                    style={{ borderRadius: "15px" }}
-                                >
-                                    <div className="card-body px-5">
-                                        <h2 className="text-uppercase text-center mb-4">
-                                            Verify OTP
-                                        </h2>
+        <div className='form-container'>
+            <div className='bg-white'>
+                <div className="form">
+                    <div className='animation-div'>
+                        <Lottie className="animation" animationData={animationSvg} />
+                    </div>
 
-                                        <form
-                                            onSubmit={handleSubmit}
-                                            ref={form}
-                                        >
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="email"
-                                                >
-                                                    <b>OTP</b>
-                                                </label>
-                                                <input
-                                                    type="otp"
-                                                    id="otp"
-                                                    name="otp"
-                                                    required
-                                                    className="form-control form-control-lg border border-4"
-                                                />
-                                            </div>
+                    <div className='form-class'>
+                        <div className='form-title'>
+                            <h1>VERIFY OTP</h1>
+                        </div>
 
-                                            <div className="d-flex justify-content-center">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body"
-                                                >
-                                                    Verify OTP
-                                                </button>
-                                            </div>
+                        <form onSubmit={handleSubmit} ref={form} className="form-body">
 
-                                            <p className="text-center text-muted link-size">
-                                                Remember your password?{" "}
-                                                <Link
-                                                    className="signin-link"
-                                                    to="/signin"
-                                                >
-                                                    Sign in here
-                                                </Link>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
+                            <div className="username input-fields">
+                                <label className="form__label" htmlFor="OTP">OTP </label>
+                                <input className="form__input" name="otp" required type="text" id="OTP" placeholder="OTP" />
                             </div>
+
+                            <div className="footer-btn">
+                                <button type="submit" className="submit-btn">Verifiy OTP</button>
+                            </div>
+                        </form>
+                        <div className="footer-btn mg">
+                            <p className='mooli'>Remember your password? {" "} </p>
+
+                            <Link className='sign-link' to="/">
+                                <p className='sign-link '>Login here!</p>
+                            </Link>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
         </div>
     );
 }

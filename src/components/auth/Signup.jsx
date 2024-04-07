@@ -1,10 +1,13 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link,useNavigate } from "react-router-dom";
+import Lottie from 'lottie-react'
+import animationSvg from '../../assets/animation.json'
+import {toast} from 'react-toastify'
+import '../auth.css'
 function Signup() {
     const form = useRef(null);
     const [error, setError] = useState(null);
-
+    const navigate = useNavigate()
     async function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData(form.current);
@@ -32,165 +35,81 @@ function Signup() {
             setError(data.error);
             return;
         }
+        toast.success("Registartion successfull!")
+        navigate('/')
         form.current.reset();
     }
 
     return (
         <>
-            <div className="gradient-custom-3">
-                <div className="mask d-flex align-items-center form-scale">
-                    <div className="container">
-                        <div className="row d-flex justify-content-center align-items-center">
-                            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                                <div
-                                    className="card"
-                                    style={{ borderRadius: "15px" }}
-                                >
-                                    <div className="card-body px-5">
-                                        <h2 className="text-uppercase text-center mb-4">
-                                            Create an account
-                                        </h2>
+            <div className='form-container'>
+                <div className='bg-white'>
+                    <div className="form">
+                        <div className='animation-div'>
+                            <Lottie className="animation" animationData={animationSvg} />
+                        </div>
 
-                                        <form
-                                            onSubmit={handleSubmit}
-                                            ref={form}
-                                        >
-                                            <span className="text-danger mb-3 d-block  fw-bold">
-                                                {error}
-                                            </span>
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example1cg"
-                                                >
-                                                    <b>UserName</b>
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    id="form3Example1cg"
-                                                    name="username"
-                                                    required
-                                                    className="form-control form-control-lg border border-4 "
-                                                />
-                                            </div>
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example3cg"
-                                                >
-                                                    <b>Your Email</b>
-                                                </label>
-                                                <input
-                                                    type="email"
-                                                    required
-                                                    id="form3Example3cg"
-                                                    name="email"
-                                                    className="form-control form-control-lg border border-4 "
-                                                />
-                                            </div>
-
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example4cg"
-                                                >
-                                                    <b>Password</b>
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    required
-                                                    id="form3Example4cg"
-                                                    name="password"
-                                                    className="form-control form-control-lg border border-4 "
-                                                />
-                                            </div>
-
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example4cdg"
-                                                >
-                                                    <b>Repeat Password</b>
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    id="form3Example4cdg"
-                                                    name="confirmPassword"
-                                                    required
-                                                    className="form-control form-control-lg border border-4 "
-                                                />
-                                            </div>
-
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example1cgaddress"
-                                                >
-                                                    <b>Address</b>
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    required
-                                                    id="form3Example1cgaddress"
-                                                    name="address"
-                                                    className="form-control border border-4  form-control-lg"
-                                                />
-                                            </div>
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example1cgarea"
-                                                >
-                                                    <b>Area</b>
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    required
-                                                    id="form3Example1cgarea"
-                                                    name="areaName"
-                                                    className="form-control border border-4  form-control-lg"
-                                                />
-                                            </div>
-
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example1cg2"
-                                                >
-                                                    <b>Pin Code</b>
-                                                </label>
-                                                <input
-                                                    type="number"
-                                                    required
-                                                    id="form3Example1cg2"
-                                                    name="pin_code"
-                                                    className="form-control border border-4  form-control-lg"
-                                                />
-                                            </div>
-
-                                            <div className="d-flex justify-content-center">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                                                >
-                                                    Register
-                                                </button>
-                                            </div>
-
-                                            <p className="text-center text-muted mt-5 mb-0 link-size">
-                                                Have an account?
-                                                <Link
-                                                    className="signin-link"
-                                                    to="/signin"
-                                                >
-                                                    {" "}
-                                                    Signin Here!!
-                                                </Link>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
+                        <div className='form-class'>
+                            <div className='form-title'>
+                                <h1 className="mt-6">REGISTRATION</h1>
                             </div>
+                            <span className="text-red-600 font-semibold">
+                                {error}
+                            </span>
+
+                            <form onSubmit={handleSubmit} ref={form} className="form-body">
+
+                                <div className="username input-fields">
+                                    <label className="form__label" htmlFor="userName">User Name </label>
+                                    <input className="form__input" name="username" required type="text" id="userName" placeholder="User Name" />
+                                </div>
+
+                                <div className="email input-fields">
+                                    <label className="form__label" htmlFor="email">Email </label>
+                                    <input type="email" id="email" name='email' required className="form__input" placeholder="Email" />
+                                </div>
+
+                                <div className="password input-fields">
+                                    <label className="form__label" htmlFor="password">Password </label>
+                                    <input className="form__input" name='password' required type="password" id="password" placeholder="Password" />
+                                </div>
+
+                                <div className="confirm-password input-fields">
+                                    <label className="form__label" htmlFor="confirmPassword">Confirm Password </label>
+                                    <input className="form__input" name="confirmPassword" required type="password" id="confirmPassword" placeholder="Confirm Password" />
+                                </div>
+
+                                <div className="firstname input-fields">
+                                    <label className="form__label" htmlFor="address">Address </label>
+                                    <input className="form__input" name="address" required type="text" id="address" placeholder="Address" />
+                                </div>
+
+                                <div className="lastname input-fields">
+                                    <label className="form__label" htmlFor="areaName">Area Name </label>
+                                    <input type="text" id="areaName" name="lastName" required className="form__input" placeholder="Area Name" />
+                                </div>
+
+                                <div className="lastname input-fields">
+                                    <label className="form__label" htmlFor="pin_code">Pin Code </label>
+                                    <input type="text" id="pin_code" name="pin_code" required className="form__input" placeholder="Pin Code" />
+                                </div>
+
+
+
+                                <div className="footer-btn">
+                                    <button type="submit" className="submit-btn">Signup</button>
+                                </div>
+
+                                <p className='footer-btn mg'>––––––OR––––––</p>
+
+                                <div className="footer-btn">
+                                    <p className='mooli'>Already have an account?</p>
+
+                                    <Link className='sign-link' to="/">
+                                        <p className='sign-link '>Login here!</p>
+                                    </Link>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -201,39 +120,4 @@ function Signup() {
 
 export default Signup;
 
-[
-    {
-        Message: "Number of pincode(s) found:2",
-        Status: "Success",
-        PostOffice: [
-            {
-                Name: "Eru",
-                Description: null,
-                BranchType: "Branch Post Office",
-                DeliveryStatus: "Non-Delivery",
-                Circle: "Gujarat",
-                District: "Navsari",
-                Division: "Navsari",
-                Region: "Vadodara",
-                Block: "Jalalpore",
-                State: "Gujarat",
-                Country: "India",
-                Pincode: "396450",
-            },
-            {
-                Name: "Eru Ac",
-                Description: null,
-                BranchType: "Sub Post Office",
-                DeliveryStatus: "Delivery",
-                Circle: "Gujarat",
-                District: "Navsari",
-                Division: "Navsari",
-                Region: "Vadodara",
-                Block: "Jalalpore",
-                State: "Gujarat",
-                Country: "India",
-                Pincode: "396450",
-            },
-        ],
-    },
-];
+

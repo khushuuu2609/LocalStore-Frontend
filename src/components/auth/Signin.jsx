@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Lottie from 'lottie-react'
 import { Link } from "react-router-dom";
-
+import animationSvg from '../../assets/animation.json'
 function Signin() {
     const form = useRef(null);
     const [error, setError] = useState(null);
@@ -50,98 +51,52 @@ function Signin() {
     }
 
     return (
-        <div>
-            <section className="vh-100 gradient-custom-3">
-                <div className="mask d-flex align-items-center h-100 form-scale">
-                    <div className="container h-100">
-                        <div className="row d-flex justify-content-center align-items-center h-100">
-                            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                                <div
-                                    className="card"
-                                    style={{ borderRadius: "15px" }}
-                                >
-                                    <div className="card-body px-5">
-                                        <h2 className="text-uppercase text-center mb-4">
-                                            Login
-                                        </h2>
+        <div className='form-container'>
+            <div className='bg-white'>
+                <div className="form">
+                    <div className='animation-div'>
+                        <Lottie className="animation" animationData={animationSvg} />
+                    </div>
 
-                                        <form
-                                            onSubmit={handleSubmit}
-                                            ref={form}
-                                        >
-                                            <span className="text-danger mb-3 d-block  fw-bold">
-                                                {error}
-                                            </span>
-
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example3cg"
-                                                >
-                                                    <b>Your Email</b>
-                                                </label>
-                                                <input
-                                                    type="email"
-                                                    required
-                                                    id="form3Example3cg"
-                                                    name="email"
-                                                    className="form-control form-control-lg border border-4 "
-                                                />
-                                            </div>
-
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form3Example4cg"
-                                                >
-                                                    <b>Password</b>
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    required
-                                                    id="form3Example4cg"
-                                                    name="password"
-                                                    className="form-control form-control-lg border border-4 "
-                                                />
-                                            </div>
-
-                                            <div className="d-flex justify-content-center">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                                                >
-                                                    Login
-                                                </button>
-                                            </div>
-
-                                            <p className="text-center text-muted mt-5 mb-0 link-size">
-                                                {"Don't have an account?"}
-                                                <Link
-                                                    className="sign-link"
-                                                    to="/signup"
-                                                >
-                                                    {" "}
-                                                    Signup Here!!{" "}
-                                                </Link>
-                                            </p>
-
-                                            <p className="text-center text-muted link-size">
-                                                Forgot password?{" "}
-                                                <Link
-                                                    className="signin-link"
-                                                    to="/forgotpassword"
-                                                >
-                                                    Change Here!!
-                                                </Link>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className='form-class'>
+                        <div className='form-title'>
+                            <h1>LOGIN</h1>
                         </div>
+                        <span className="text-red-600 font-semibold">
+                                {error}
+                            </span>
+                        <form onSubmit={handleSubmit} ref={form} className="form-body">
+
+                            <div className="username input-fields">
+                                <label className="form__label" htmlFor="email">Email</label>
+                                <input className="form__input" name='email' required type="text" id="email"  placeholder="User Name" />
+                            </div>
+
+                            <div className="password input-fields">
+                                <label className="form__label" htmlFor="password">Password </label>
+                                <input className="form__input" name='password' required type="password"  id="password" placeholder="Password" />
+                            </div>
+
+                            <div className="footer-btn mg">
+                                <Link className='sign-link' to="/forgotpassword"><p className='sign-link'>Forgot Password?</p></Link>
+                            </div>
+
+                            <div className="footer-btn">
+                                <button type="submit" className="submit-btn">Login</button>
+                            </div>
+
+                            <p className='footer-btn mg'>––––––OR––––––</p>
+
+                            <div className="footer-btn mg">
+                                <p className='mooli'>Don't have an account?</p>
+                                <Link className='sign-link' to="/signup"><p className='sign-link'>Signup here!</p></Link>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
-            </section>
+            </div>
+
         </div>
     );
 }

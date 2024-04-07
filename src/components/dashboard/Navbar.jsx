@@ -1,94 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-
+import Badge from '@mui/material/Badge';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 function Navbar() {
     const { role } = JSON.parse(localStorage.getItem("token"));
+    const [notifications, setNotifications] = useState([]);
+
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const token = JSON.parse(localStorage.getItem("token"));
+                const response = await fetch(
+                    `http://localhost:8080/api/notifications?userId=${token.userId}`,
+                    {
+                        method: "GET",
+                    }
+                );
+                const data = await response.json();
+                console.log("notifications==>", data);
+                setNotifications(data.reverse());
+            } catch (error) {
+                console.error("Error fetching notifications:", error);
+            }
+        };
+        if (role === "SELLER") {
+            fetchNotifications();
+        }
+    }, []);
     return (
         <>
-            <div className="container-fluid fixed-top navbarclour ">
-                <div className="container px-0 ">
-                    <nav className="navbar navbar-light navbar-expand-xl  ">
-                        <a href="index.html" className="navbar-brand">
-                            <h1 className="display-6">Local Store</h1>
-                        </a>
-                        <button
-                            className="navbar-toggler py-2 px-3"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarCollapse"
-                        >
-                            <span className="fa fa-bars"></span>
-                        </button>
-                        <div
-                            className="collapse navbar-collapse"
-                            id="navbarCollapse"
-                        >
-                            <div className="navbar-nav mx-auto ">
-                                <NavLink
-                                    to="home"
-                                    className="nav-item nav-link"
-                                >
-                                    <b>Home</b>
-                                </NavLink>
-                                <NavLink
-                                    to="shop"
-                                    className="nav-item nav-link"
-                                >
-                                    <b>Shop</b>
-                                </NavLink>
-                                <NavLink
-                                    to="orders"
-                                    className="nav-item nav-link"
-                                >
-                                    <b>Orders</b>
-                                </NavLink>
-                                <NavLink
-                                    to="offers"
-                                    className="nav-item nav-link"
-                                >
-                                    <b>Offers</b>
-                                </NavLink>
-                                {role !== "SELLER" && (
-                                    <NavLink
-                                        to="seller"
-                                        className="nav-item nav-link"
-                                    >
-                                        <b>Explore as Seller</b>
-                                    </NavLink>
-                                )}
-                                <NavLink
-                                    to="contact"
-                                    className="nav-item nav-link"
-                                >
-                                    <b>Contact Us</b>
-                                </NavLink>
-                            </div>
-                            <div className="d-flex m-3 me-0">
-                                {role === "SELLER" && (
-                                    <NavLink
-                                        to="/notification"
-                                        className="position-relative me-4 my-auto"
-                                    >
-                                        <i className="fa fa-bell fa-2x text-dark"></i>
-                                        <span
-                                            className="position-absolute bg-danger rounded-circle d-flex align-items-center justify-content-center text-white px-1"
-                                            style={{
-                                                top: "-5px",
-                                                left: "15px",
-                                                height: "20px",
-                                                minWidth: "20px",
-                                            }}
-                                        >
-                                            3
-                                        </span>
-                                    </NavLink>
-                                )}
-                                <NavLink to="/profile" className="my-auto">
-                                    <i className="fas fa-user fa-2x text-dark"></i>
-                                </NavLink>
-                            </div>
-                        </div>
-                    </nav>
+            <div className="bg-white poppins z-50 flex items-center justify-between px-12 py-6 top-0 sticky shadow-2xl scroll-smooth">
+                <div>
+                    <h1 className="text-5xl font-semibold croissant">
+                        <Link to="/home">
+                            Local Store
+                        </Link>
+                    </h1>
+                </div>
+                <div>
+                    <ul className="flex w-full justify-between items-center gap-8">
+                        <li>
+                            <NavLink to='/shop'>
+                                Shop
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/orders'>Orders</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/offers'}>Offers</NavLink>
+                        </li>
+                        {role !== "SELLER" && <li>
+                            <NavLink to={'/seller'}>Explore as Seller</NavLink>
+                        </li>}
+                        <li>
+                            <NavLink to={'/contact'}>Contact Us</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/profile'}>Profile</NavLink>
+                        </li>
+                        {role === "SELLER" && <li>
+                            <NavLink to={'/notification'}><Badge badgeContent={notifications.length} color="success">
+                                <svg className=" rounded-full -m-2" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v.75h-.557A4.214 4.214 0 0 0 6.237 7.7l-.221 3.534a7.377 7.377 0 0 1-1.308 3.754a1.617 1.617 0 0 0 1.135 2.529l3.407.408V19a2.75 2.75 0 1 0 5.5 0v-1.075l3.407-.409a1.617 1.617 0 0 0 1.135-2.528a7.376 7.376 0 0 1-1.308-3.754l-.221-3.533a4.214 4.214 0 0 0-4.206-3.951H13zm-2.25 16a1.25 1.25 0 1 0 2.5 0v-.75h-2.5z" clip-rule="evenodd" /></svg>
+                            </Badge></NavLink>
+                        </li>}
+                        <li>
+                            <button className="bg-red-600 py-2 px-8 text-white pb-3 rounded-3xl hover:bg-red-700  active:bg-red-600">
+                                Logout
+                            </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </>

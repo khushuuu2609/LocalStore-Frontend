@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import Lottie from 'lottie-react'
+import animationSvg from '../../assets/animation.json'
 function ForgotPassword() {
     const nav = useNavigate();
 
@@ -18,7 +19,7 @@ function ForgotPassword() {
             body: JSON.stringify({ email }),
             credentials: "include",
         })
-        if(res.ok){
+        if (res.ok) {
             nav("/verify-otp", { state: email });
         }
         // Reset the form after submission
@@ -26,67 +27,40 @@ function ForgotPassword() {
     }
 
     return (
-        <div>
-            <section className="vh-100 gradient-custom-3">
-                <div className="mask d-flex align-items-center h-100 form-scale">
-                    <div className="container h-100">
-                        <div className="row d-flex justify-content-center align-items-center h-100">
-                            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                                <div
-                                    className="card"
-                                    style={{ borderRadius: "15px" }}
-                                >
-                                    <div className="card-body px-5">
-                                        <h2 className="text-uppercase text-center mb-4">
-                                            Forgot Password
-                                        </h2>
+        <div className='form-container'>
+            <div className='bg-white'>
+                <div className="form">
+                    <div className='animation-div'>
+                        <Lottie className="animation" animationData={animationSvg} />
+                    </div>
 
-                                        <form
-                                            onSubmit={handleSubmit}
-                                            ref={form}
-                                        >
-                                            <div className="form-outline mb-4">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="email"
-                                                >
-                                                    <b>Email</b>
-                                                </label>
-                                                <input
-                                                    type="email"
-                                                    id="email"
-                                                    name="email"
-                                                    required
-                                                    className="form-control form-control-lg border border-4"
-                                                />
-                                            </div>
+                    <div className='form-class'>
+                        <div className='form-title'>
+                            <h1>FORGOT PASSWORD</h1>
+                        </div>
 
-                                            <div className="d-flex justify-content-center">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body"
-                                                >
-                                                    Reset Password
-                                                </button>
-                                            </div>
+                        <form onSubmit={handleSubmit} ref={form} className="form-body">
 
-                                            <p className="text-center text-muted ">
-                                                Remember your password?{" "}
-                                                <Link
-                                                    className="signin-link link-size"
-                                                    to="/signin"
-                                                >
-                                                    Sign in here
-                                                </Link>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
+                            <div className="username input-fields">
+                                <label className="form__label" htmlFor="email">Email </label>
+                                <input className="form__input" name="email" required type="text" id="email" placeholder="Email" />
                             </div>
+
+                            <div className="footer-btn">
+                                <button type="submit" className="submit-btn">Get OTP</button>
+                            </div>
+                        </form>
+                        <div className="footer-btn mg">
+                            <p className='mooli'>Remember your password? {" "} </p>
+
+                            <Link className='sign-link' to="/">
+                                <p className='sign-link '>Login here!</p>
+                            </Link>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
         </div>
     );
 }
