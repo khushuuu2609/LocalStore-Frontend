@@ -75,19 +75,13 @@ function Profile() {
                             {user.username}
                         </span>
                         <span className="text-black-50">{user.email}</span>
-                        <button
-                            className="btn btn-danger"
-                            type="button"
-                            onClick={logout}
-                        >
-                            logout
-                        </button>
                     </div>
                 </div>
+                <div className="justify-center">
                 <div className="col-md-5 border-right home-layout card-bg w-50 vh-90">
-                    <div className="p-3 py-5">
-                        <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h3 className="text-right ">Profile Settings</h3>
+                    <div className="bg-white my-12 rounded-md w-10/12 md:w-3/5 lg:w-1/2 xl:w-1/3 2xl:w-2/5">
+                        <div className="flex items-center justify-between bg-themeColor-400 text-white font-semibold rounded-t-md p-1">
+                            <h1 className="text-lg">Profile</h1>
                         </div>
                         <span className="text-danger mb-3 d-block  fw-bold">
                             {error}
@@ -101,7 +95,8 @@ function Profile() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                                    text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                             name="username"
                                             placeholder="first name"
                                             defaultValue={user.username}
@@ -115,7 +110,8 @@ function Profile() {
                                         </label>
                                         <input
                                             type="email"
-                                            className="form-control"
+                                            className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                                    text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                             name="email"
                                             defaultValue={user.email}
                                             placeholder="email"
@@ -130,7 +126,8 @@ function Profile() {
                                         </label>
                                         <textarea
                                             type="text"
-                                            className="form-control"
+                                            className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                                            text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                             name="address"
                                             defaultValue={user.address}
                                             placeholder="Address"
@@ -144,7 +141,8 @@ function Profile() {
                                         </label>
                                         <input
                                             type="number"
-                                            className="form-control"
+                                            className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                                    text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                             name="pin_code"
                                             defaultValue={user.pin_code}
                                             placeholder="Pincode"
@@ -166,6 +164,7 @@ function Profile() {
                 </div>
             </div>
         </div>
+    </div>
     );
 }
 

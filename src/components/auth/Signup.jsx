@@ -86,7 +86,7 @@ function Signup() {
 
                                 <div className="lastname input-fields">
                                     <label className="form__label" htmlFor="areaName">Area Name </label>
-                                    <input type="text" id="areaName" name="lastName" required className="form__input" placeholder="Area Name" />
+                                    <input type="text" id="areaName" name="areaName" required className="form__input" placeholder="Area Name" />
                                 </div>
 
                                 <div className="lastname input-fields">
