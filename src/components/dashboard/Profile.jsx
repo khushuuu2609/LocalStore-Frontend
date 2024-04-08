@@ -61,110 +61,94 @@ function Profile() {
     }
 
     return (
-        <div className="container rounded bg-white mt-5 mb-5 ">
-            <div className="row">
-                <div className="col-md-3 border-right">
-                    <div className="d-flex flex-column align-items-center text-center p-3 py-3 home-layout">
-                        <img
-                            className="rounded-circle mt-5"
-                            width="150px"
-                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                            alt="Profile"
-                        />
-                        <span className="font-weight-bold">
-                            {user.username}
-                        </span>
-                        <span className="text-black-50">{user.email}</span>
-                    </div>
+        <div className="w-screen flex items-center justify-center">
+            {/* <div className="d-flex flex-column align-items-center text-center p-3 py-3 home-layout">
+                <img
+                    className="rounded-circle mt-5"
+                    width="150px"
+                    src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                    alt="Profile"
+                />
+                <span className="font-weight-bold">{user.username}</span>
+                <span className="text-black-50">{user.email}</span>
+            </div> */}
+            <div className="bg-white my-12 rounded-md w-10/12 md:w-3/5 lg:w-1/2 xl:w-1/3 2xl:w-2/5">
+                <div className="flex items-center justify-between bg-themeColor-400 text-white font-semibold rounded-t-md p-1">
+                    <h1 className="text-lg">Edit Profile</h1>
                 </div>
-                <div className="justify-center">
-                <div className="col-md-5 border-right home-layout card-bg w-50 vh-90">
-                    <div className="bg-white my-12 rounded-md w-10/12 md:w-3/5 lg:w-1/2 xl:w-1/3 2xl:w-2/5">
-                        <div className="flex items-center justify-between bg-themeColor-400 text-white font-semibold rounded-t-md p-1">
-                            <h1 className="text-lg">Profile</h1>
-                        </div>
-                        <span className="text-danger mb-3 d-block  fw-bold">
-                            {error}
-                        </span>
-                        <form onSubmit={handleSubmit} ref={form}>
-                            <div className="row mt-2">
-                                <div className="col-md-12 mb-3">
-                                    <div className="form-group">
-                                        <label className="labels text-dark font-weight-bold">
-                                            UserName
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                <span className="text-danger mb-3 d-block  fw-bold">
+                    {error}
+                </span>
+                <div className="w-full flex-1 p-14">
+                    <form onSubmit={handleSubmit} ref={form}>
+                        <div className="row mt-2">
+                            <div className="col-md-12 mb-3">
+                                <label className="labels text-dark font-weight-bold">
+                                    UserName
+                                </label>
+                                <input
+                                    type="text"
+                                    className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
                                     text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                            name="username"
-                                            placeholder="first name"
-                                            defaultValue={user.username}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-md-12 mb-3">
-                                    <div className="form-group">
-                                        <label className="labels text-dark font-weight-bold">
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
-                                    text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                            name="email"
-                                            defaultValue={user.email}
-                                            placeholder="email"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="col-md-12 mb-3">
-                                    <div className="form-group">
-                                        <label className="labels text-dark font-weight-bold">
-                                            Location
-                                        </label>
-                                        <textarea
-                                            type="text"
-                                            className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
-                                            text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                            name="address"
-                                            defaultValue={user.address}
-                                            placeholder="Address"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-md-12 mb-3">
-                                    <div className="form-group">
-                                        <label className="labels text-dark font-weight-bold">
-                                            Pincode
-                                        </label>
-                                        <input
-                                            type="number"
-                                            className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
-                                    text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                            name="pin_code"
-                                            defaultValue={user.pin_code}
-                                            placeholder="Pincode"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="mt-5 text-center">
-                                    <button
-                                        className="btn btn-success btn-block btn-lg gradient-custom-4 text-dark"
-                                        type="submit"
-                                    >
-                                        Save Profile
-                                    </button>
-                                </div>
+                                    name="username"
+                                    placeholder="first name"
+                                    defaultValue={user.username}
+                                />
                             </div>
-                        </form>
-                        {/* Rest of the form fields */}
-                    </div>
+                            <div className="col-md-12 mb-3">
+                                <label className="labels text-dark font-weight-bold">
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                                    text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    name="email"
+                                    defaultValue={user.email}
+                                    placeholder="email"
+                                />
+                            </div>
+
+                            <div className="col-md-12 mb-3">
+                                <label className="labels text-dark font-weight-bold">
+                                    Location
+                                </label>
+                                <textarea
+                                    type="text"
+                                    className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                                            text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    name="address"
+                                    defaultValue={user.address}
+                                    placeholder="Address"
+                                />
+                            </div>
+                            <div className="col-md-12 mb-3">
+                                <label className="labels text-dark font-weight-bold">
+                                    Pincode
+                                </label>
+                                <input
+                                    type="number"
+                                    className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                                    text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    name="pin_code"
+                                    defaultValue={user.pin_code}
+                                    placeholder="Pincode"
+                                />
+                            </div>
+                            <div className="mt-4">
+                                <button
+                                    className="bg-green-500 py-2 px-8 text-white rounded-3xl hover:bg-green-700  active:bg-green-600 transition-all duration-500"
+                                    type="submit"
+                                >
+                                    Save Profile
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+                {/* Rest of the form fields */}
             </div>
         </div>
-    </div>
     );
 }
 

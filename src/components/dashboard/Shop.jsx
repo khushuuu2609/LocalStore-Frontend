@@ -19,7 +19,7 @@ function Shop() {
         const formdata = new FormData(form.current);
         formdata.append("userId", token.userId);
         formdata.append("username", token.username);
-  
+
         const response = await fetch("http://localhost:8080/api/img/shop", {
             method: "POST",
             body: formdata,
@@ -61,8 +61,18 @@ function Shop() {
                                                 className="w-8 h-8 mb-4 text-gray-500"
                                             >
                                                 <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
-                                                <line x1="16" x2="22" y1="5" y2="5" />
-                                                <line x1="19" x2="19" y1="2" y2="8" />
+                                                <line
+                                                    x1="16"
+                                                    x2="22"
+                                                    y1="5"
+                                                    y2="5"
+                                                />
+                                                <line
+                                                    x1="19"
+                                                    x2="19"
+                                                    y1="2"
+                                                    y2="8"
+                                                />
                                                 <circle cx="9" cy="9" r="2" />
                                                 <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
                                             </svg>
@@ -93,11 +103,17 @@ function Shop() {
                                                 className="z-10"
                                                 onClick={() => {
                                                     setImage(null);
-                                                    form.current[0].value = null;
+                                                    form.current[0].value =
+                                                        null;
                                                 }}
                                             >
                                                 <path d="M21 9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
-                                                <line x1="16" x2="22" y1="5" y2="5" />
+                                                <line
+                                                    x1="16"
+                                                    x2="22"
+                                                    y1="5"
+                                                    y2="5"
+                                                />
                                                 <circle cx="9" cy="9" r="2" />
                                                 <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
                                             </svg>
@@ -145,7 +161,9 @@ function Shop() {
                                     id="productName"
                                     name="productName"
                                     value={productName}
-                                    onChange={(e) => setProductName(e.target.value)} // Handle input change
+                                    onChange={(e) =>
+                                        setProductName(e.target.value)
+                                    } // Handle input change
                                     required
                                 />
                             </div>
@@ -162,7 +180,7 @@ function Shop() {
                                 ></textarea>
                             </div>
                             <div>
-                                <button className="bg-green-500 py-2 px-8 text-white rounded-3xl">
+                                <button className="bg-green-500 py-2 px-8 text-white rounded-3xl hover:bg-green-700  active:bg-green-600 transition-all duration-500">
                                     Place
                                 </button>
                             </div>

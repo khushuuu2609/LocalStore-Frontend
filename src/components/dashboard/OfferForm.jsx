@@ -73,14 +73,14 @@ const OfferForm = ({ offerId, formState }) => {
                         <path d="m9 9 6 6" />
                     </svg>
                 </div>
-                <div className="w-full flex-1 p-14">
+                <div className="w-full flex-1 px-12 py-8">
                     <form ref={form} onSubmit={handleSubmit}>
                         <div className="mx-auto max-w-sm flex flex-col gap-4">
                             <div className="flex items-center justify-center w-full">
                                 {!image ? (
                                     <label
                                         htmlFor="dropzone-file"
-                                        className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 "
+                                        className="flex flex-col items-center justify-center w-full h-52 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 "
                                     >
                                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                             <svg
@@ -96,8 +96,18 @@ const OfferForm = ({ offerId, formState }) => {
                                                 className="w-8 h-8 mb-4 text-gray-500"
                                             >
                                                 <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
-                                                <line x1="16" x2="22" y1="5" y2="5" />
-                                                <line x1="19" x2="19" y1="2" y2="8" />
+                                                <line
+                                                    x1="16"
+                                                    x2="22"
+                                                    y1="5"
+                                                    y2="5"
+                                                />
+                                                <line
+                                                    x1="19"
+                                                    x2="19"
+                                                    y1="2"
+                                                    y2="8"
+                                                />
                                                 <circle cx="9" cy="9" r="2" />
                                                 <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
                                             </svg>
@@ -113,7 +123,7 @@ const OfferForm = ({ offerId, formState }) => {
                                         </div>
                                     </label>
                                 ) : (
-                                    <div className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
+                                    <div className="relative flex flex-col items-center justify-center w-full h-52 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
                                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -128,11 +138,17 @@ const OfferForm = ({ offerId, formState }) => {
                                                 className="z-10"
                                                 onClick={() => {
                                                     setImage(null);
-                                                    form.current[0].value = null;
+                                                    form.current[0].value =
+                                                        null;
                                                 }}
                                             >
                                                 <path d="M21 9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
-                                                <line x1="16" x2="22" y1="5" y2="5" />
+                                                <line
+                                                    x1="16"
+                                                    x2="22"
+                                                    y1="5"
+                                                    y2="5"
+                                                />
                                                 <circle cx="9" cy="9" r="2" />
                                                 <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
                                             </svg>
@@ -163,7 +179,9 @@ const OfferForm = ({ offerId, formState }) => {
                                     id="productName"
                                     name="productName"
                                     value={productName}
-                                    onChange={(e) => setProductName(e.target.value)} // Handle input change
+                                    onChange={(e) =>
+                                        setProductName(e.target.value)
+                                    } // Handle input change
                                     required
                                 />
                             </div>
@@ -176,7 +194,7 @@ const OfferForm = ({ offerId, formState }) => {
                                     className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                     id="description"
                                     name="description"
-                                    rows="3"
+                                    rows="2"
                                     required
                                 ></textarea>
                             </div>
@@ -192,7 +210,7 @@ const OfferForm = ({ offerId, formState }) => {
                                     required
                                 />
                             </div>
-                
+
                             <div>
                                 <button className="bg-green-500 py-2 px-8 text-white rounded-3xl hover:bg-green-700  active:bg-green-600 transition-all duration-500">
                                     Place
