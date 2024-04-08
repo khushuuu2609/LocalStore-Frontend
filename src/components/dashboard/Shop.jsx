@@ -2,19 +2,24 @@ import { useRef, useState } from "react";
 import categories from "../../service/categories";
 import { toast } from "react-toastify";
 import { readImage } from "../../service/readImage";
+
 function Shop() {
     const form = useRef(null);
     const [image, setImage] = useState(null);
+    const [productName, setProductName] = useState(""); // State for productName
     const token = JSON.parse(localStorage.getItem("token"));
+
     const fileChange = async (e) => {
         const imageString = await readImage(e.target.files[0]);
         setImage(imageString);
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formdata = new FormData(form.current);
         formdata.append("userId", token.userId);
         formdata.append("username", token.username);
+  
         const response = await fetch("http://localhost:8080/api/img/shop", {
             method: "POST",
             body: formdata,
@@ -23,12 +28,12 @@ function Shop() {
         const data = await response.text();
         toast.success(data);
         setImage(null);
+        setProductName(""); // Clear productName after form submission
         form.current.reset();
     };
+
     return (
-        <div
-            className="w-screen flex items-start justify-center"
-        >
+        <div className="w-screen flex items-start justify-center">
             <div className="bg-white my-12 rounded-md w-10/12 md:w-3/5 lg:w-1/2 xl:w-1/3 2xl:w-2/5">
                 <div className="flex items-center justify-between bg-themeColor-400 text-white font-semibold rounded-t-md p-1">
                     <h1 className="text-lg">Place Order</h1>
@@ -64,7 +69,7 @@ function Shop() {
                                             <p className="mb-2 text-sm text-gray-500 ">
                                                 <span className="font-semibold">
                                                     Click to upload
-                                                </span>{' '}
+                                                </span>{" "}
                                                 or drag and drop
                                             </p>
                                             <p className="text-xs text-gray-500">
@@ -129,6 +134,20 @@ function Shop() {
                                         </option>
                                     ))}
                                 </select>
+                            </div>
+                            <div className="">
+                                <label htmlFor="productName" className="">
+                                    Product Name
+                                </label>
+                                <input
+                                    type="text"
+                                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    id="productName"
+                                    name="productName"
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)} // Handle input change
+                                    required
+                                />
                             </div>
                             <div className="">
                                 <label htmlFor="description" className="">

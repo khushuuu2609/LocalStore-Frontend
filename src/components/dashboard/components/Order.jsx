@@ -19,10 +19,10 @@ function order({ order, index }) {
                                 <h4 className="font-semibold ">Order Number</h4><span>{order?.shopId}</span>
                             </div>
                             <div>
-                                <h4 className="font-semibold">Product Name</h4><span>{order?.name ?? "Name Here!"}</span>
+                                <h4 className="font-semibold">Product Name</h4><span>{order?.productName ?? "Name Here!"}</span>
                             </div>
                             <div>
-                                <h4 className="font-semibold">Date Placed</h4><span>{order?.date ?? "date here"}</span>
+                                <h4 className="font-semibold">Date Placed</h4><span>{order?.orderTime ?? "date here"}</span>
                             </div>
                         </div>
                         <div>

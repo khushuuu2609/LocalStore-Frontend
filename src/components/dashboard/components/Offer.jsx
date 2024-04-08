@@ -25,10 +25,10 @@ function Offer({ notification, index, acceptOffer }) {
                                 <h4 className="font-semibold">Offered By</h4><span>{notification?.seller?.user?.username ?? "date here"}</span>
                             </div>
                             <div>
-                                <h4 className="font-semibold">Product Name</h4><span>{notification?.shopId?.name ?? "Name Here!"}</span>
+                                <h4 className="font-semibold">Product Name</h4><span>{notification?.shopId?.productName ?? "Name Here!"}</span>
                             </div>
                             <div>
-                                <h4 className="font-semibold">Date Placed</h4><span>{notification?.shopId?.date ?? "date here"}</span>
+                                <h4 className="font-semibold">Date Placed</h4><span>{notification?.shopId?.orderTime ?? "date here"}</span>
                             </div>
                         </div>
 

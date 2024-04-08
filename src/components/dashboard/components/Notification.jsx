@@ -17,13 +17,13 @@ function Notification({ index, notification, setShowForm, deliver, sendData }) {
                         <div className="flex items-center justify-between gap-12 w-full" >
                             <div className="flex items-center justify-between gap-12" >
                                 <div>
-                                    <h4 className="font-semibold">Product Name</h4><span>{notification?.shopId?.name ?? "Name Here!"}</span>
+                                    <h4 className="font-semibold">Product Name</h4><span>{notification?.shopId?.productName ?? "Name Here!"}</span>
                                 </div>
                                 <div>
                                     <h4 className="font-semibold">Customer Name</h4><span>{notification?.user?.username ?? "date here"}</span>
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold">Date Placed</h4><span>{notification?.shopId?.date ?? "date here"}</span>
+                                    <h4 className="font-semibold">Date Placed</h4><span>{notification?.shopId?.orderTime ?? "date here"}</span>
                                 </div>
                             </div>
                             <div>

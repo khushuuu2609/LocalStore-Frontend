@@ -5,16 +5,15 @@ import { readImage } from "../../service/readImage";
 
 const OfferForm = ({ offerId, formState }) => {
     const [image, setImage] = useState(null);
+    const [productName, setProductName] = useState(""); // State for productName
     const token = JSON.parse(localStorage.getItem("token"));
     const form = useRef(null);
+
     const fileChange = async (e) => {
         const imageString = await readImage(e.target.files[0]);
         setImage(imageString);
     };
-    console.log(
-        "offer id----",
-        offerId
-    );
+
     async function handleSubmit(e) {
         e.preventDefault();
         const offer = new FormData(form.current);
@@ -36,15 +35,17 @@ const OfferForm = ({ offerId, formState }) => {
             form.current.reset();
             formState(false);
         } catch (e) {
-            toast.error("Somethiong went wrong!");
+            toast.error("Something went wrong!");
         }
     }
+
     function hideForm(e) {
         if (e.target.id === "offerForm") {
             formState(false);
             return;
         }
     }
+
     return (
         <div
             className="w-screen h-screen fixed top-0 left-0 z-50 bg-slate-800 bg-opacity-40 shadow-2xl flex items-center justify-center backdrop-box"
@@ -103,7 +104,7 @@ const OfferForm = ({ offerId, formState }) => {
                                             <p className="mb-2 text-sm text-gray-500 ">
                                                 <span className="font-semibold">
                                                     Click to upload
-                                                </span>{' '}
+                                                </span>{" "}
                                                 or drag and drop
                                             </p>
                                             <p className="text-xs text-gray-500">
@@ -152,6 +153,20 @@ const OfferForm = ({ offerId, formState }) => {
                                     accept="image/*"
                                 />
                             </div>
+                            <div className="">
+                                <label htmlFor="productName" className="">
+                                    Product Name
+                                </label>
+                                <input
+                                    type="text"
+                                    className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    id="productName"
+                                    name="productName"
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)} // Handle input change
+                                    required
+                                />
+                            </div>
 
                             <div className="">
                                 <label htmlFor="description" className="">
@@ -169,13 +184,15 @@ const OfferForm = ({ offerId, formState }) => {
                                 <label htmlFor="price" className="block">
                                     Price
                                 </label>
-                                <input type="number"
+                                <input
+                                    type="number"
                                     className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                     id="price"
                                     name="price"
                                     required
                                 />
                             </div>
+                
                             <div>
                                 <button className="bg-green-500 py-2 px-8 text-white rounded-3xl hover:bg-green-700  active:bg-green-600 transition-all duration-500">
                                     Place
