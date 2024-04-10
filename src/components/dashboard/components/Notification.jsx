@@ -88,7 +88,7 @@ function Notification({ index, notification, setShowForm, deliver, sendData }) {
                         <div className="max-w-64 max-h-64">
                             <img
                                 onClick={() => setOpen(true)}
-                                className="object-contain cursor-pointer rounded-lg drop-shadow-2xl shadow-xl "
+                                className="object-contain max-w-64 max-h-64 cursor-pointer rounded-lg drop-shadow-2xl shadow-xl "
                                 src={`data:image/jpeg;base64,${notification?.photo}`}
                                 alt=""
                             />
