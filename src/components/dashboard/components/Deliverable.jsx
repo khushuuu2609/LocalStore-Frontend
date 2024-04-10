@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ImageModal from "./ImageModal";
-function Offer({ notification, index, acceptOffer }) {
+import ImageModal from "../components/ImageModal";
+function Deliverable({ index, order, deliver }) {
+    console.log(order);
     const [isOpen1, setOpen1] = useState(false);
-    const [isOpen2, setOpen2] = useState(false);
-
+    const [isOpen2, setOpen2] = useState(false);    
     return (
         <>
             <Accordion
                 elevation={2}
                 defaultExpanded={!index}
-                key={notification.offer_id}
                 sx={{
                     [`&:before`]: { display: "none" },
                     width: "75%",
@@ -35,33 +33,50 @@ function Offer({ notification, index, acceptOffer }) {
                             },
                         }}
                     >
-                        <div className="flex items-center justify-between gap-12">
-                            <div>
-                                <h4 className="font-semibold">Order Number</h4>
-                                <span>
-                                    {notification?.shop.shopId ?? "date here"}
-                                </span>
+                        <div className="flex items-center justify-between gap-12 w-full">
+                            <div className="flex items-center justify-between gap-12">
+                                <div>
+                                    <h4 className="font-semibold">
+                                        Product Name
+                                    </h4>
+                                    <span>
+                                        {order?.shop?.productName ??
+                                            "Name Here!"}
+                                    </span>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold">
+                                        Customer Name
+                                    </h4>
+                                    <span>
+                                        {order?.user?.username ?? "date here"}
+                                    </span>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold">
+                                        Date Placed
+                                    </h4>
+                                    <span>
+                                        {order?.shop?.orderTime
+                                            .split("T")
+                                            .join("  ") ?? "date here"}
+                                    </span>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="font-semibold">Offered By</h4>
-                                <span>
-                                    {notification?.seller?.user?.username ??
-                                        "date here"}
-                                </span>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold">Product Name</h4>
-                                <span>
-                                    {notification?.shopId?.productName ??
-                                        "Name Here!"}
-                                </span>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold">Date Placed</h4>
-                                <span>
-                                    {notification?.shop?.orderTime
-                                        .split("T")
-                                        .join("  ") ?? "date here"}
+                                <span
+                                    className={`grid me-8 items-center w-fit whitespace-nowrap rounded-full border-2  py-1 px-4 font-sans text-xs font-bold uppercase ${
+                                        order?.shop?.status === "OPEN"
+                                            ? "border-blue-800 text-blue-800"
+                                            : order?.shop?.status ===
+                                              "IN_PROGRESS"
+                                            ? "border-themeColor-400 text-themeColor-400"
+                                            : "border-green-800 text-green-800"
+                                    } `}
+                                >
+                                    {order?.shop?.status === "IN_PROGRESS"
+                                        ? "IN PROGRESS"
+                                        : order?.shop?.status}
                                 </span>
                             </div>
                         </div>
@@ -72,16 +87,16 @@ function Offer({ notification, index, acceptOffer }) {
                         <h6 className="font-medium">
                             Category:{" "}
                             <span className="font-normal">
-                                {notification?.categories}
+                                {order?.shop?.categories}
                             </span>
                         </h6>
                         <h6 className="font-medium">
-                            For More Queries:{" "}
+                            Customer Contact:{" "}
                             <span className="font-normal text-themeColor-400 cursor-pointer">
                                 <a
-                                    href={`mailto:${notification?.seller?.user?.email}`}
+                                    href={`mailto:${order?.seller?.user?.email}`}
                                 >
-                                    {notification?.seller?.user?.email}
+                                    {order?.user?.email}
                                 </a>
                             </span>
                         </h6>
@@ -91,12 +106,12 @@ function Offer({ notification, index, acceptOffer }) {
                             <img
                                 onClick={() => setOpen1(true)}
                                 className="object-contain cursor-pointer max-h-64 rounded-lg drop-shadow-2xl shadow-xl "
-                                src={`data:image/jpeg;base64,${notification?.shop?.photo}`}
+                                src={`data:image/jpeg;base64,${order?.shop?.photo}`}
                                 alt=""
                             />
                             {isOpen1 && (
                                 <ImageModal
-                                    src={`data:image/jpeg;base64,${notification?.shop?.photo}`}
+                                    src={`data:image/jpeg;base64,${order?.shop?.photo}`}
                                     toggleModal={setOpen1}
                                 />
                             )}
@@ -127,12 +142,12 @@ function Offer({ notification, index, acceptOffer }) {
                             <img
                                 onClick={() => setOpen2(true)}
                                 className="object-cover cursor-pointer max-h-64 rounded-lg drop-shadow-2xl shadow-xl "
-                                src={`data:image/jpeg;base64,${notification?.photo}`}
+                                src={`data:image/jpeg;base64,${order?.offer?.photo}`}
                                 alt=""
                             />
                             {isOpen2 && (
                                 <ImageModal
-                                    src={`data:image/jpeg;base64,${notification?.photo}`}
+                                    src={`data:image/jpeg;base64,${order?.offer?.photo}`}
                                     toggleModal={setOpen2}
                                 />
                             )}
@@ -142,31 +157,41 @@ function Offer({ notification, index, acceptOffer }) {
                         </span>
                         <div></div>
                         <span className="text-center block mt-8 mb-6">
-                            Available Product
+                            Deliverable Product
                         </span>
                     </div>
                     <div className="px-6">
                         <h6 className="font-medium">
-                            Description by Seller:{" "}
+                            Description by Customer:{" "}
                             <span className="font-normal">
-                                {notification?.description}
+                                {order?.shop?.description}
                             </span>
                         </h6>
                         <h6 className="font-medium">
-                            Offered Price:{" "}
+                            Price:{" "}
                             <span className="font-normal text-themeColor-400">
-                                {notification?.price} Rs.{" "}
+                                {order?.shop?.price} Rs.{" "}
+                            </span>
+                        </h6>
+                        <h6 className="font-medium mt-6">
+                            Customer Address:{" "}
+                            <span className="font-normal">
+                                {order?.user?.address}
                             </span>
                         </h6>
                     </div>
-                    <div className="px-6 mt-6">
-                        <button
-                            id={index}
-                            onClick={acceptOffer}
-                            className="bg-green-500 py-2 px-8 text-white rounded-3xl hover:bg-green-700  active:bg-green-600 transition-all duration-500"
-                        >
-                            Accept Offer
-                        </button>
+                    <div className="mx-6 mt-6">
+                        {order?.shop?.status === "IN_PROGRESS" ? (
+                            <button
+                                id={order?.shop.shopId}
+                                onClick={deliver}
+                                className="bg-green-500 py-2 px-8 text-white rounded-3xl hover:bg-green-700  active:bg-green-600 transition-all duration-500"
+                            >
+                                Deliver
+                            </button>
+                        ) : (
+                            <p className="text-green-700">Order delivered ✔</p>
+                        )}
                     </div>
                 </AccordionDetails>
             </Accordion>
@@ -174,4 +199,4 @@ function Offer({ notification, index, acceptOffer }) {
     );
 }
 
-export default Offer;
+export default Deliverable;

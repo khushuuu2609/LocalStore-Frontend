@@ -5,7 +5,7 @@ import OfferForm from "./OfferForm";
 import Notification from "./components/Notification";
 import Loader from "../Loader";
 function Notifications() {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [notifications, setNotifications] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [offerdata, sendData] = useState({});
@@ -14,7 +14,7 @@ function Notifications() {
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                setLoading(true)
+                setLoading(true);
                 const response = await fetch(
                     `http://localhost:8080/api/notifications?userId=${token.userId}`,
                     {
@@ -24,7 +24,7 @@ function Notifications() {
                 const data = await response.json();
                 console.log("notifications==>", data);
                 setNotifications(data.reverse());
-                setLoading(false)
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching notifications:", error);
             }
@@ -32,7 +32,6 @@ function Notifications() {
 
         fetchNotifications();
     }, [refresh]);
-
 
     async function deliver(e) {
         if (
@@ -50,20 +49,31 @@ function Notifications() {
         setrefresh((prev) => !prev);
     }
     if (loading) {
-        return <Loader />
+        return <Loader />;
     }
     return (
         <>
             <div className="px-12">
                 <div className="w-9/12 mx-auto mt-8">
-                    <div><h2 className="text-themeColor-400 text-4xl font-bold">Notifications</h2></div>
+                    <div>
+                        <h2 className="text-themeColor-400 text-4xl font-bold">
+                            Notifications
+                        </h2>
+                    </div>
                     <div></div>
                 </div>
                 <div className="flex flex-col justify-center gap-6 my-12">
                     {notifications.map((notification, index) => {
                         return (
-                            <Notification sendData={sendData} key={notification.notifyId} index={index} deliver={deliver} notification={notification} setShowForm={setShowForm} />
-                        )
+                            <Notification
+                                sendData={sendData}
+                                key={notification.notifyId}
+                                index={index}
+                                deliver={deliver}
+                                notification={notification}
+                                setShowForm={setShowForm}
+                            />
+                        );
                     })}
                 </div>
                 {showForm && (

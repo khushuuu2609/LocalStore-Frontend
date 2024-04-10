@@ -41,6 +41,7 @@ function BuyerNotifications() {
                 (offer) => offer?.shop?.status === "OPEN"
             );
             const acceptedOffer = filterOffer[index];
+            console.log(acceptedOffer);
             console.log(acceptedOffer.shop.shopId);
             try {
                 setLoading(true);
@@ -62,12 +63,23 @@ function BuyerNotifications() {
                         method: "DELETE",
                     }
                 );
-                const data = await deleteOffers.text();
-                console.log(data);
+                const deleteNotification = await fetch(
+                    `http://localhost:8080/api/deleteByShopId/${acceptedOffer?.shop?.shopId}`,
+                    {
+                        method: "DELETE",
+                    }
+                );
+                const deliverables = await fetch(
+                    `http://localhost:8080/api/deliverables/save?userId=${token.userId}&shopId=${acceptedOffer?.shop?.shopId}&sellerId=${acceptedOffer?.seller?.sellerId}&offerId=${acceptedOffer?.offer_id}`,
+                    {
+                        method: "GET",
+                    }
+                );
                 toast.success("Offer Accepted successfully!");
                 setrefresh((prev) => !prev);
                 setLoading(false);
             } catch (e) {
+                console.log(e);
                 toast.error("Something went wrong!");
             }
         } else return;

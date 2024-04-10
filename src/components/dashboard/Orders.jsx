@@ -71,8 +71,9 @@ function Orders() {
                 `http://localhost:8080/api/img/shops/${token.userId}`
             );
             const data = await response.json();
-            orderData.current = data.reverse();
-            setOrders(data.reverse());
+            data?.reverse();
+            orderData.current = data;
+            setOrders(data);
             setTimeout(() => {
                 setLoading(false);
             }, 200);

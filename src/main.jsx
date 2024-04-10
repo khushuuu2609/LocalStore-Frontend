@@ -27,6 +27,7 @@ import PaymentPage from "./components/PaymentPage.jsx";
 import SellerProfile from "./components/SellerProfile.jsx";
 import BuyerNotifications from "./components/dashboard/NotificationsBuyers.jsx";
 import VerifyOTP from "./components/auth/VerifyOTP.jsx";
+import Deliverables from "./components/dashboard/Deliverables.jsx";
 
 const token = JSON.parse(localStorage.getItem("token"));
 const router = createBrowserRouter(
@@ -58,6 +59,7 @@ const router = createBrowserRouter(
                             <Route path="profile" element={<SellerProfile />} />
                         </>
                     )}
+                    <Route path="work-space" element={<Deliverables />} />
                     <Route path="notification" element={<Notifications />} />
                     <Route path="shop" element={<Shop />} />
                     <Route path="orders" element={<Orders />} />
