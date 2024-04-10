@@ -62,7 +62,7 @@ function EnterNewPassword() {
                             </div>
 
                             <div className="footer-btn">
-                                <button type="submit" className="submit-btn">Get OTP</button>
+                                <button type="submit" className="submit-btn">Change Password</button>
                             </div>
                         </form>
                         <div className="footer-btn mg">
