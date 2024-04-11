@@ -69,7 +69,7 @@ function Signin() {
 
                             <div className="username input-fields">
                                 <label className="form__label" htmlFor="email">Email</label>
-                                <input className="form__input" name='email' required type="text" id="email"  placeholder="User Name" />
+                                <input className="form__input" name='email' required type="text" id="email"  placeholder="User Email" />
                             </div>
 
                             <div className="password input-fields">
