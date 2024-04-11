@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Lottie from 'lottie-react'
+import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
-import animationSvg from '../../assets/animation.json'
+import animationSvg from "../../assets/animation.json";
 function Signin() {
     const form = useRef(null);
     const [error, setError] = useState(null);
@@ -20,11 +20,8 @@ function Signin() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),
         });
-        const data = await response.json();
-        if (data?.error) {
-            setError(data.error);
-            return;
-        } else {
+        if (response.ok) {
+            const data = await response.json();
             toast.success("Login successful!");
             if (data.role === "SELLER") {
                 const seller = await await fetch(
@@ -47,56 +44,95 @@ function Signin() {
                 })
             );
             navigate("/home");
+        } else {
+            setError("Invalid Credentials");
+            return;
         }
     }
 
     return (
-        <div className='form-container'>
-            <div className='bg-white'>
+        <div className="form-container">
+            <div className="bg-white">
                 <div className="form">
-                    <div className='animation-div'>
-                        <Lottie className="animation" animationData={animationSvg} />
+                    <div className="animation-div">
+                        <Lottie
+                            className="animation"
+                            animationData={animationSvg}
+                        />
                     </div>
 
-                    <div className='form-class'>
-                        <div className='form-title'>
+                    <div className="form-class">
+                        <div className="form-title">
                             <h1>LOGIN</h1>
                         </div>
                         <span className="text-red-600 font-semibold">
-                                {error}
-                            </span>
-                        <form onSubmit={handleSubmit} ref={form} className="form-body">
-
+                            {error}
+                        </span>
+                        <form
+                            onSubmit={handleSubmit}
+                            ref={form}
+                            className="form-body"
+                        >
                             <div className="username input-fields">
-                                <label className="form__label" htmlFor="email">Email</label>
-                                <input className="form__input" name='email' required type="text" id="email"  placeholder="User Email" />
+                                <label className="form__label" htmlFor="email">
+                                    Email
+                                </label>
+                                <input
+                                    className="form__input"
+                                    name="email"
+                                    required
+                                    type="text"
+                                    id="email"
+                                    placeholder="User Email"
+                                />
                             </div>
 
                             <div className="password input-fields">
-                                <label className="form__label" htmlFor="password">Password </label>
-                                <input className="form__input" name='password' required type="password"  id="password" placeholder="Password" />
+                                <label
+                                    className="form__label"
+                                    htmlFor="password"
+                                >
+                                    Password{" "}
+                                </label>
+                                <input
+                                    className="form__input"
+                                    name="password"
+                                    required
+                                    type="password"
+                                    id="password"
+                                    placeholder="Password"
+                                />
                             </div>
 
                             <div className="footer-btn mg">
-                                <Link className='sign-link' to="/forgotpassword"><p className='sign-link'>Forgot Password?</p></Link>
+                                <Link
+                                    className="sign-link"
+                                    to="/forgotpassword"
+                                >
+                                    <p className="sign-link">
+                                        Forgot Password?
+                                    </p>
+                                </Link>
                             </div>
 
                             <div className="footer-btn">
-                                <button type="submit" className="submit-btn">Login</button>
+                                <button type="submit" className="submit-btn">
+                                    Login
+                                </button>
                             </div>
 
-                            <p className='footer-btn mg'>––––––OR––––––</p>
+                            <p className="footer-btn mg">––––––OR––––––</p>
 
                             <div className="footer-btn mg">
-                                <p className='mooli'>Don't have an account?</p>
-                                <Link className='sign-link' to="/signup"><p className='sign-link'>Signup here!</p></Link>
+                                <p className="mooli">Don't have an account?</p>
+                                <Link className="sign-link" to="/signup">
+                                    <p className="sign-link">Signup here!</p>
+                                </Link>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

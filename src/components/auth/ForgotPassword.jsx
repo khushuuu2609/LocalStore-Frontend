@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Lottie from 'lottie-react'
-import animationSvg from '../../assets/animation.json'
+import Lottie from "lottie-react";
+import { toast } from "react-toastify";
+import animationSvg from "../../assets/animation.json";
 function ForgotPassword() {
     const nav = useNavigate();
 
@@ -18,49 +19,68 @@ function ForgotPassword() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),
             credentials: "include",
-        })
+        });
         if (res.ok) {
             nav("/verify-otp", { state: email });
+        } else {
+            const error = await res.json();
+            toast.error(error?.message);
         }
         // Reset the form after submission
         form.current.reset();
     }
 
     return (
-        <div className='form-container'>
-            <div className='bg-white'>
+        <div className="form-container">
+            <div className="bg-white">
                 <div className="form">
-                    <div className='animation-div'>
-                        <Lottie className="animation" animationData={animationSvg} />
+                    <div className="animation-div">
+                        <Lottie
+                            className="animation"
+                            animationData={animationSvg}
+                        />
                     </div>
 
-                    <div className='form-class'>
-                        <div className='form-title'>
+                    <div className="form-class">
+                        <div className="form-title">
                             <h1>FORGOT PASSWORD</h1>
                         </div>
 
-                        <form onSubmit={handleSubmit} ref={form} className="form-body">
-
+                        <form
+                            onSubmit={handleSubmit}
+                            ref={form}
+                            className="form-body"
+                        >
                             <div className="username input-fields">
-                                <label className="form__label" htmlFor="email">Email </label>
-                                <input className="form__input" name="email" required type="text" id="email" placeholder="Email" />
+                                <label className="form__label" htmlFor="email">
+                                    Email{" "}
+                                </label>
+                                <input
+                                    className="form__input"
+                                    name="email"
+                                    required
+                                    type="text"
+                                    id="email"
+                                    placeholder="Email"
+                                />
                             </div>
 
                             <div className="footer-btn">
-                                <button type="submit" className="submit-btn">Get OTP</button>
+                                <button type="submit" className="submit-btn">
+                                    Get OTP
+                                </button>
                             </div>
                         </form>
                         <div className="footer-btn mg">
-                            <p className='mooli'>Remember your password? {" "} </p>
+                            <p className="mooli">Remember your password? </p>
 
-                            <Link className='sign-link' to="/">
-                                <p className='sign-link '>Login here!</p>
+                            <Link className="sign-link" to="/">
+                                <p className="sign-link ">Login here!</p>
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

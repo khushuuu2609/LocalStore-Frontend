@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import Offer from "./components/Offer";
 import Loader from "../Loader";
 
@@ -9,10 +12,10 @@ function BuyerNotifications() {
     const [loading, setLoading] = useState(false);
     const [refresh, setrefresh] = useState(false);
     const token = JSON.parse(localStorage.getItem("token"));
-    const filterOffer = offers.filter(
-        (offer) => offer?.shop?.status === "OPEN"
-    );
-
+    const [open, setOpen] = useState(false);
+    const [filter, setFilter] = useState("none");
+    const dataBuffer = useRef(null);
+    console.log("this is offers", offers);
     useEffect(() => {
         async function fetchOffer() {
             setLoading(true);
@@ -24,7 +27,11 @@ function BuyerNotifications() {
             );
             const data = await response.json();
             console.log(data);
-            setOffers(data.reverse());
+            data.reverse();
+            dataBuffer.current = data.filter(
+                (offer) => offer?.shop?.status === "OPEN"
+            );
+            setOffers(data.filter((offer) => offer?.shop?.status === "OPEN"));
             setTimeout(() => {
                 setLoading(false);
             }, 200);
@@ -37,10 +44,7 @@ function BuyerNotifications() {
         if (confirm("Are you sure you want to accept this offer!")) {
             //
             const index = parseInt(e.target.id);
-            const filterOffer = offers.filter(
-                (offer) => offer?.shop?.status === "OPEN"
-            );
-            const acceptedOffer = filterOffer[index];
+            const acceptedOffer = offers[index];
             console.log(acceptedOffer);
             console.log(acceptedOffer.shop.shopId);
             try {
@@ -85,7 +89,7 @@ function BuyerNotifications() {
         } else return;
     }
 
-    if (filterOffer.length < 1) {
+    if (offers?.length < 1) {
         return (
             <>
                 <h1 className="text-5xl text-center text-themeColor-400 font-semibold mt-28">
@@ -106,23 +110,75 @@ function BuyerNotifications() {
                             Offers
                         </h2>
                     </div>
-                    <div></div>
+                    <div className="mb-3">
+                        <label htmlFor="categories" className="block">
+                            Select Categories
+                        </label>
+                        <FormControl sx={{ my: 1, width: "30%" }}>
+                            <Select
+                                labelId="demo-controlled-open-select-label"
+                                id="demo-controlled-open-select"
+                                open={open}
+                                onClose={() => setOpen(false)}
+                                onOpen={() => setOpen(true)}
+                                value={filter}
+                                label="Age"
+                                onChange={(event) => {
+                                    setFilter(event.target.value);
+                                    if (event.target.value === "L2H") {
+                                        setOffers((offers) => {
+                                            offers.sort(
+                                                (a, b) => a.price - b.price
+                                            );
+                                            console.log(offers);
+                                            return offers;
+                                        });
+                                    } else if (event.target.value == "H2L") {
+                                        setOffers((offers) => {
+                                            offers.sort(
+                                                (a, b) => b.price - a.price
+                                            );
+                                            console.log(offers);
+                                            return offers;
+                                        });
+                                    } else {
+                                        setOffers(dataBuffer.current);
+                                    }
+                                }}
+                                sx={{
+                                    "& legend": { display: "none" },
+                                    "& fieldset": { top: 0 },
+                                    bgcolor: "rgb(243 244 246)",
+                                    borderRadius: "0.5rem",
+                                    width: "100%",
+                                    border: "1px solid rgb(229 231 235)",
+                                    outline: "none",
+                                }}
+                            >
+                                <MenuItem value={"none"}>None</MenuItem>
+                                <MenuItem value={"L2H"}>
+                                    Price - Low To High
+                                </MenuItem>
+                                <MenuItem value={"H2L"}>
+                                    Price - High To Low
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>
                 <div className="flex flex-col justify-center gap-6 my-12">
-                    {offers
-                        .filter((offer) => offer?.shop?.status === "OPEN")
-                        .map((notification, index) => {
-                            if (notification?.shop?.status === "OPEN") {
-                                return (
-                                    <Offer
-                                        key={notification?.offer_id}
-                                        index={index}
-                                        notification={notification}
-                                        acceptOffer={acceptOffer}
-                                    />
-                                );
-                            }
-                        })}
+                    {offers.map((notification, index) => {
+                        if (notification?.shop?.status === "OPEN") {
+                            return (
+                                <Offer
+                                    key={notification?.offer_id}
+                                    index={index}
+                                    notification={notification}
+                                    acceptOffer={acceptOffer}
+                                />
+                            );
+                        }
+                    })}
                 </div>
             </div>
         </>

@@ -111,7 +111,7 @@ function Profile() {
 
                             <div className="col-md-12 mb-3">
                                 <label className="labels text-dark font-weight-bold">
-                                    Location
+                                    Address
                                 </label>
                                 <textarea
                                     type="text"
@@ -120,6 +120,22 @@ function Profile() {
                                     name="address"
                                     defaultValue={user.address}
                                     placeholder="Address"
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label
+                                    htmlFor="area"
+                                    className="labels text-dark font-weight-bold"
+                                >
+                                    Area
+                                </label>
+                                <input
+                                    type="text"
+                                    className="w-full resize-none px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 
+                                    text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    id="areaName"
+                                    name="areaName"
+                                    defaultValue={user.areaName}
                                 />
                             </div>
                             <div className="col-md-12 mb-3">
